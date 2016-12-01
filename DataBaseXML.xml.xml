@@ -1,0 +1,133 @@
+<?xml version="1.0" standalone="yes"?>
+<libraryDataSet xmlns="http://tempuri.org/libraryDataSet.xsd">
+  <articles>
+    <ItemID>193fe3ba-f2db-4a04-98e4-4bc1a185feb4</ItemID>
+    <Version>1.0</Version>
+    <AuthorID>f60477a6-4aff-4549-83bd-0ae7368b160f</AuthorID>
+  </articles>
+  <articles>
+    <ItemID>73461de2-90cd-4a03-87f0-7c5adf52f42a</ItemID>
+    <Version>1.0</Version>
+    <AuthorID>f60477a6-4aff-4549-83bd-0ae7368b160f</AuthorID>
+  </articles>
+  <articlesinmagazines>
+    <ArticleID>193fe3ba-f2db-4a04-98e4-4bc1a185feb4</ArticleID>
+    <MagazineID>9f74e8be-bba4-4008-b050-cf235f45f460</MagazineID>
+  </articlesinmagazines>
+  <articlesinmagazines>
+    <ArticleID>73461de2-90cd-4a03-87f0-7c5adf52f42a</ArticleID>
+    <MagazineID>a1e9bbd9-ca7b-4d1e-a0ca-0df3020d1e41</MagazineID>
+  </articlesinmagazines>
+  <authors>
+    <ID>00234beb-5feb-4a5b-80b1-7191d6979ce6</ID>
+    <Name>1</Name>
+  </authors>
+  <authors>
+    <ID>b226dd11-11b8-42bc-bd13-705f2c754a88</ID>
+    <Name>John Sonmez</Name>
+  </authors>
+  <authors>
+    <ID>f60477a6-4aff-4549-83bd-0ae7368b160f</ID>
+    <Name>Ya</Name>
+  </authors>
+  <authors>
+    <ID>4842c513-6813-4ec4-804f-d879fb734249</ID>
+    <Name>Steven Pressfield</Name>
+  </authors>
+  <books>
+    <ItemID>06e01e84-6307-45cb-8554-048116e8e821</ItemID>
+    <ISBN>778f54da-e902-439d-8902-c343258e9dcc</ISBN>
+    <AuthorID>b226dd11-11b8-42bc-bd13-705f2c754a88</AuthorID>
+  </books>
+  <books>
+    <ItemID>897db68f-f62f-4210-9a05-8569b5b1b89e</ItemID>
+    <ISBN>a4170c2b-f660-46dd-a20a-ebe0dd791964</ISBN>
+    <AuthorID>4842c513-6813-4ec4-804f-d879fb734249</AuthorID>
+  </books>
+  <borrows>
+    <CopyID>7a58da9a-138b-4bb0-92fd-a5c785dc2a49</CopyID>
+    <BorrowedDate>05.07.2016 16:00:17</BorrowedDate>
+    <UserID>11111111-1111-1111-1111-111111111111</UserID>
+  </borrows>
+  <copies>
+    <ID>06cf46d5-cde8-437c-b07c-cfd50b257f31</ID>
+    <ItemID>06e01e84-6307-45cb-8554-048116e8e821</ItemID>
+    <IsBorrowed>false</IsBorrowed>
+  </copies>
+  <copies>
+    <ID>5ffa3faf-7190-4cdc-a474-61d9d7add29a</ID>
+    <ItemID>193fe3ba-f2db-4a04-98e4-4bc1a185feb4</ItemID>
+    <IsBorrowed>true</IsBorrowed>
+  </copies>
+  <copies>
+    <ID>9670f963-1503-4564-9f82-06bba7ec376d</ID>
+    <ItemID>9f74e8be-bba4-4008-b050-cf235f45f460</ItemID>
+    <IsBorrowed>true</IsBorrowed>
+  </copies>
+  <copies>
+    <ID>a4692ba8-a49c-4f73-9f2f-2f7f0129379d</ID>
+    <ItemID>a1e9bbd9-ca7b-4d1e-a0ca-0df3020d1e41</ItemID>
+    <IsBorrowed>true</IsBorrowed>
+  </copies>
+  <copies>
+    <ID>b09c05e3-4051-4f90-8a9e-a2fd26813dfb</ID>
+    <ItemID>73461de2-90cd-4a03-87f0-7c5adf52f42a</ItemID>
+    <IsBorrowed>true</IsBorrowed>
+  </copies>
+  <copies>
+    <ID>7a58da9a-138b-4bb0-92fd-a5c785dc2a49</ID>
+    <ItemID>897db68f-f62f-4210-9a05-8569b5b1b89e</ItemID>
+    <IsBorrowed>true</IsBorrowed>
+  </copies>
+  <items>
+    <ID>06e01e84-6307-45cb-8554-048116e8e821</ID>
+    <Name>SoftSkills</Name>
+    <Publisher>Letter</Publisher>
+    <PublishedDate>04.07.2016 15:43:23</PublishedDate>
+  </items>
+  <items>
+    <ID>193fe3ba-f2db-4a04-98e4-4bc1a185feb4</ID>
+    <Name>C# vs Java</Name>
+    <Publisher>Me</Publisher>
+    <PublishedDate>05.07.2016 15:43:55</PublishedDate>
+  </items>
+  <items>
+    <ID>73461de2-90cd-4a03-87f0-7c5adf52f42a</ID>
+    <Name>C# vs Ruby</Name>
+    <Publisher>Me</Publisher>
+    <PublishedDate>05.07.2016 15:43:55</PublishedDate>
+  </items>
+  <items>
+    <ID>9f74e8be-bba4-4008-b050-cf235f45f460</ID>
+    <Name>3</Name>
+    <Publisher>3</Publisher>
+    <PublishedDate>05.07.2016 15:42:53</PublishedDate>
+  </items>
+  <items>
+    <ID>a1e9bbd9-ca7b-4d1e-a0ca-0df3020d1e41</ID>
+    <Name>2</Name>
+    <Publisher>2</Publisher>
+    <PublishedDate>05.07.2016 15:42:53</PublishedDate>
+  </items>
+  <items>
+    <ID>897db68f-f62f-4210-9a05-8569b5b1b89e</ID>
+    <Name>The War of Art</Name>
+    <Publisher>Letter</Publisher>
+    <PublishedDate>05.07.2016 15:59:50</PublishedDate>
+  </items>
+  <magazines>
+    <ItemID>9f74e8be-bba4-4008-b050-cf235f45f460</ItemID>
+    <IssueNumber>3</IssueNumber>
+  </magazines>
+  <magazines>
+    <ItemID>a1e9bbd9-ca7b-4d1e-a0ca-0df3020d1e41</ItemID>
+    <IssueNumber>2</IssueNumber>
+  </magazines>
+  <users>
+    <ID>11111111-1111-1111-1111-111111111111</ID>
+    <Name>Сергій Ліченко</Name>
+    <UserName>1</UserName>
+    <Password>06d49632-c9dc-9bcb-62ae-aef99612ba6b</Password>
+    <IsAdmin>true</IsAdmin>
+  </users>
+</libraryDataSet>
