@@ -1,5 +1,5 @@
 # Library
-Simulation of library management system
+This application is simulating library management system
 
 ! This application is not fully localized for english users
 
