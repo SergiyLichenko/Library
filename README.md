@@ -7,7 +7,7 @@ Imagine if you are a director of a library, this program will allow you to manag
 
 Example of usage:
 
-  1. When you launch this application you will have two options to choose data source
+  1. When you launch this application you will have two options for choosing data source
   
      - SQL Database:
      
@@ -17,7 +17,7 @@ Example of usage:
      
       ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Login%20XML.png)
       
-  2. So let's choose SQL database and click connect. After connection to the database the authorization window will popup and here you have to put your credentials in order to login into system:
+  2. So let's choose SQL database and click "Connect". After connection to the database the authorization window will popup and here you have to put your credentials in order to login into the system:
   
       ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Authorization.png)
       
@@ -35,7 +35,7 @@ Example of usage:
       
   We can add multiple books by clicking "Add Book" and save it with one request by clicking "Save Book"
   
-  6. So I have adding three books in my library they appear in the main list:
+  6. So I have added three books in my library and they appeared in the main list:
   
       ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/After%203%20Add.png)
       
@@ -49,7 +49,7 @@ Example of usage:
         
   9. If your library is really big you will have a lot of books, articles or magazines so you need somehow to search, and this application provides search functionality as well. You can search by name, author or publisher:
   
-        ![alt tag]( https://github.com/SergiyLichenko/Library/blob/master/Docs/Search.png)
+        ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Search.png)
         
   10. You can also update your book, magazine or article. Let's update finded book by clicking "Book -> Update Selected Book"
   
