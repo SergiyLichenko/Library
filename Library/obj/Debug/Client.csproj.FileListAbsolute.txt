@@ -73,3 +73,6 @@ E:\Projects\Apps\DataBases\Library\Library\obj\Debug\Library.Properties.Resource
 E:\Projects\Apps\DataBases\Library\Library\obj\Debug\Library.ShowAllCopies.resources
 E:\Projects\Apps\DataBases\Library\Library\obj\Debug\Library.UpdateBook.resources
 E:\Projects\Apps\DataBases\Library\Library\obj\Debug\Client.csproj.GenerateResource.Cache
+F:\GitHub\Library\Library\bin\Debug\Library.exe.config
+F:\GitHub\Library\Library\obj\Debug\Library.exe
+F:\GitHub\Library\Library\obj\Debug\Library.pdb
