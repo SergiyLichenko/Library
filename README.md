@@ -45,11 +45,11 @@ Example of usage:
       
   8. When visitor will read this book and later come back to the library, you can create a record that the book is back in you database:
   
-        ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Take%20back.png)
+       ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Take%20back.png)
             
   9. If your library is really big you will have a lot of books, articles or magazines so you need somehow to search, and this application provides search functionality as well. You can search by name, author or publisher:
   
-        ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Search.png)
+       ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Search.png)
         
   10. You can also update your book, magazine or article. Let's update finded book by clicking "Book -> Update Selected Book"
   
