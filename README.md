@@ -1,7 +1,7 @@
 # Library
 This application is simulating library management system
 
-  ! Currently it is not fully localized for English users
+  **! Currently it is not fully localized for English users**
 
 Imagine if you are a director of a library, this program will allow you to manage all your processes
 
@@ -47,7 +47,7 @@ Example of usage:
   
        ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Take%20back.png)
             
-  9. If your library is really big you will have a lot of books, articles or magazines so you need somehow to search, and this application provides search functionality as well. You can search by name, author or publisher:
+  9. If your library is really big, you will have a lot of books, articles or magazines so you need somehow to search, and this application provides search functionality as well. You can search by name, author or publisher:
   
        ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Search.png)
         
@@ -60,7 +60,7 @@ Example of usage:
        ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Create%20User.png)
         
 
-There is also functionality for saving all your data into XML file (for example you want to transfer it, so you will not have to transfer entire database), switching between user profiles and all the features which were shown above for books are also availabel for articles and magazines
+There is also functionality for saving all your data into XML file (for example if you want to transfer all you data, so you will not have to transfer entire database), switching between user profiles and all the features which were shown above for books are also available for articles and magazines
 
 #
 Finally here is the diagram of the database for this application
