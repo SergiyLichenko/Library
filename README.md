@@ -53,11 +53,11 @@ Example of usage:
         
   10. You can also update your book, magazine or article. Let's update finded book by clicking "Book -> Update Selected Book"
   
-        ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Update%20book.png)
+       ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Update%20book.png)
         
   11. If you are admin you can also add more users into your library managment system by clicking "Users -> Create New User". And this window will pop up
   
-        ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Create%20User.png)
+       ![alt tag](https://github.com/SergiyLichenko/Library/blob/master/Docs/Create%20User.png)
         
 
 There is also functionality for saving all your data into XML file (for example you want to transfer it, so you will not have to transfer entire database), switching between user profiles and all the features which were shown above for books are also availabel for articles and magazines
