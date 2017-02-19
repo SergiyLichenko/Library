@@ -1,7 +1,7 @@
 # Library
 This application is simulating library management system
 
-  **! Currently it is not fully localized for English users**
+  **Currently it is not fully localized for English users**
 
 Imagine if you are a director of a library, this program will allow you to manage all your processes
 
