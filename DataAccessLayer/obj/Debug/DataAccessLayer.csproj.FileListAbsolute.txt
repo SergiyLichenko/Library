@@ -25,3 +25,13 @@ E:\Projects\Apps\DataBases\Library\DataAccessLayer\bin\Debug\Provider.pdb
 E:\Projects\Apps\DataBases\Library\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
 E:\Projects\Apps\DataBases\Library\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 E:\Projects\Apps\DataBases\Library\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\bin\Debug\Common.dll
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\bin\Debug\Provider.dll
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\bin\Debug\Common.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\bin\Debug\Common.dll.config
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\bin\Debug\Provider.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

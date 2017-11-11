@@ -76,3 +76,29 @@ E:\Projects\Apps\DataBases\Library\Library\obj\Debug\Client.csproj.GenerateResou
 F:\GitHub\Library\Library\bin\Debug\Library.exe.config
 F:\GitHub\Library\Library\obj\Debug\Library.exe
 F:\GitHub\Library\Library\obj\Debug\Library.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\Library.exe.config
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\Library.exe
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\Library.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\Common.dll
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\DataAccessLayer.dll
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\Provider.dll
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\Common.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\Common.dll.config
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\DataAccessLayer.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\bin\Debug\Provider.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Client.csprojResolveAssemblyReference.cache
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.Authorization.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.BooksCancelation.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.Client.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.LogIn.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.New_User.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.NewArticle.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.NewBook.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.NewMagazine.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.NotAddedMagazines.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.Properties.Resources.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.ShowAllCopies.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.UpdateBook.resources
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Client.csproj.GenerateResource.Cache
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.exe
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Library\obj\Debug\Library.pdb

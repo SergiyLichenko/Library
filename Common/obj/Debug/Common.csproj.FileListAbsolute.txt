@@ -22,3 +22,9 @@ E:\Projects\Apps\DataBases\Library\Common\bin\Debug\ru\Microsoft.VisualStudio.Qu
 E:\Projects\Apps\DataBases\Library\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
 E:\Projects\Apps\DataBases\Library\Common\obj\Debug\Common.dll
 E:\Projects\Apps\DataBases\Library\Common\obj\Debug\Common.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Common\bin\Debug\Common.dll.config
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Common\bin\Debug\Common.dll
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Common\bin\Debug\Common.pdb
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Common\obj\Debug\Common.dll
+F:\КПИ\ІПСА\4 Курс\Проектування інформаційних систем\Library\Common\obj\Debug\Common.pdb
