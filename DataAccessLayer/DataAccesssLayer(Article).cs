@@ -11,7 +11,7 @@ namespace DataAccessLayer
     {
         public List<Article> GetAllArticles()
         {
-            DataRow[] searchedArticles = LibraryDataSet.articles.Select();
+            DataRow[] searchedArticles = LibraryDataSet.Articles.Select();
             return GetRestPartsOfArticles(searchedArticles);
         }
         private List<Article> GetRestPartsOfArticles(DataRow[] searchedArticles)
@@ -19,15 +19,15 @@ namespace DataAccessLayer
             if (searchedArticles.Length == 0 || searchedArticles == null)
                 return null;
             List<Article> articles = new List<Article>();
-            foreach (libraryDataSet.articlesRow art in searchedArticles)
+            foreach (libraryDataSet.ArticlesRow art in searchedArticles)
             {
                 Article tempArticle=null;
-                libraryDataSet.articlesinmagazinesRow[] articleAndMagazine = art.GetarticlesinmagazinesRows();
-                if (art.itemsRow != null && articleAndMagazine[0].magazinesRow.itemsRow != null &&
-                    articleAndMagazine[0].magazinesRow != null && articleAndMagazine.Length > 0 && art.authorsRow != null)
-                    tempArticle = new Article(art.itemsRow.ID,art.itemsRow.Name, art.itemsRow.Publisher, art.itemsRow.PublishedDate,
-                        articleAndMagazine[0].magazinesRow.itemsRow.Name, articleAndMagazine[0].magazinesRow.IssueNumber,
-                        art.authorsRow.Name, art.Version);
+                libraryDataSet.ArticlesInMagazinesRow[] articleAndMagazine = art.GetArticlesInMagazinesRows();
+                if (art.ItemsRow != null && articleAndMagazine[0].MagazinesRow.ItemsRow != null &&
+                    articleAndMagazine[0].MagazinesRow != null && articleAndMagazine.Length > 0 && art.AuthorsRow != null)
+                    tempArticle = new Article(art.ItemsRow.ID,art.ItemsRow.Name, art.ItemsRow.Publisher, art.ItemsRow.PublishedDate,
+                        articleAndMagazine[0].MagazinesRow.ItemsRow.Name, articleAndMagazine[0].MagazinesRow.IssueNumber,
+                        art.AuthorsRow.Name, art.Version);
                 else
                     throw new Exception("Cannot find corresponding Item");
                 if (tempArticle != null)
@@ -38,26 +38,26 @@ namespace DataAccessLayer
 
         public List<Article> SearchedArticles(Article searchedArticle)
         {
-            libraryDataSet.itemsRow[] items = (libraryDataSet.itemsRow[])LibraryDataSet.items.Select(MakeFilteredQuery(searchedArticle.ItemFields));
+            libraryDataSet.ItemsRow[] items = (libraryDataSet.ItemsRow[])LibraryDataSet.Items.Select(MakeFilteredQuery(searchedArticle.ItemFields));
             if (items.Length == 0 && items == null)
                 return new List<Article>(0);
 
-            List<libraryDataSet.articlesRow> articles = new List<libraryDataSet.articlesRow>();
-            foreach (libraryDataSet.itemsRow item in items)
+            List<libraryDataSet.ArticlesRow> articles = new List<libraryDataSet.ArticlesRow>();
+            foreach (libraryDataSet.ItemsRow item in items)
             {
-                libraryDataSet.articlesRow[] article = item.GetarticlesRows();
+                libraryDataSet.ArticlesRow[] article = item.GetArticlesRows();
                 if (article != null && article.Length != 0)
                     articles.Add(article[0]);
             }
             
-            libraryDataSet.authorsRow[] authors = (libraryDataSet.authorsRow[])LibraryDataSet.authors.Select(MakeFilteredQuery(searchedArticle.AuthorFields));
+            libraryDataSet.AuthorsRow[] authors = (libraryDataSet.AuthorsRow[])LibraryDataSet.Authors.Select(MakeFilteredQuery(searchedArticle.AuthorFields));
             if (authors.Length == 0 && authors == null)
                 return new List<Article>(0);
 
-            List<libraryDataSet.articlesRow> final = new List<libraryDataSet.articlesRow>();
+            List<libraryDataSet.ArticlesRow> final = new List<libraryDataSet.ArticlesRow>();
             for (int i = 0; i < authors.Length; i++)
             {
-                List<libraryDataSet.articlesRow> findedArticles = articles.FindAll(val => val.AuthorID == authors[i].ID);
+                List<libraryDataSet.ArticlesRow> findedArticles = articles.FindAll(val => val.AuthorID == authors[i].ID);
                 if (findedArticles != null && findedArticles.Count > 0)
                     final.AddRange(findedArticles);
             }
@@ -77,43 +77,43 @@ namespace DataAccessLayer
                 
                 if (!isUnique)
                 {
-                    DataRow[] artRows = LibraryDataSet.articles.Select(String.Format("Version = '{0}'", article.Version));
-                    foreach (libraryDataSet.articlesRow artRow in artRows)
+                    DataRow[] artRows = LibraryDataSet.Articles.Select(String.Format("Version = '{0}'", article.Version));
+                    foreach (libraryDataSet.ArticlesRow artRow in artRows)
                     {
-                        if (artRow.itemsRow.Name==article.Name && artRow.itemsRow.Publisher == article.Publisher && artRow.authorsRow.Name == article.AuthorName)
+                        if (artRow.ItemsRow.Name==article.Name && artRow.ItemsRow.Publisher == article.Publisher && artRow.AuthorsRow.Name == article.AuthorName)
                         {
-                            libraryDataSet.copiesRow Copy = LibraryDataSet.copies.AddcopiesRow(Guid.NewGuid().ToString(), artRow.itemsRow, false);
-                            Copy.ItemID = artRow.itemsRow.ID;
+                            libraryDataSet.CopiesRow Copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), artRow.ItemsRow, false);
+                            Copy.ItemID = artRow.ItemsRow.ID;
                             provider.UpdateAllData();
                         }
                     }
                     notAdded.Add(article);
                     continue;
                 }
-                libraryDataSet.itemsRow itemRow = LibraryDataSet.items.AdditemsRow(article.ID, article.Name, article.Publisher, article.PublishedDate);
-                libraryDataSet.authorsRow authorRow;
+                libraryDataSet.ItemsRow itemRow = LibraryDataSet.Items.AddItemsRow(article.ID, article.Name, article.Publisher, article.PublishedDate);
+                libraryDataSet.AuthorsRow authorRow;
                 if (author == null)
-                    authorRow = LibraryDataSet.authors.AddauthorsRow(Guid.NewGuid().ToString(), article.AuthorName);
+                    authorRow = LibraryDataSet.Authors.AddAuthorsRow(Guid.NewGuid().ToString(), article.AuthorName);
                 else
-                    authorRow = (libraryDataSet.authorsRow)author;
-                libraryDataSet.articlesRow articleRow = LibraryDataSet.articles.AddarticlesRow(itemRow, article.Version, authorRow);
+                    authorRow = (libraryDataSet.AuthorsRow)author;
+                libraryDataSet.ArticlesRow articleRow = LibraryDataSet.Articles.AddArticlesRow(itemRow, authorRow, article.Version );
 
-                DataRowCollection allMagazines = LibraryDataSet.magazines.Rows;
-                List<libraryDataSet.magazinesRow> searchedMagazines = new List<libraryDataSet.magazinesRow>();
+                DataRowCollection allMagazines = LibraryDataSet.Magazines.Rows;
+                List<libraryDataSet.MagazinesRow> searchedMagazines = new List<libraryDataSet.MagazinesRow>();
                 
-                foreach(libraryDataSet.magazinesRow magazine in allMagazines)
+                foreach(libraryDataSet.MagazinesRow magazine in allMagazines)
                 {
-                    if (magazine.itemsRow.Name == article.MagazineName && magazine.IssueNumber == article.MagazineIssueNumber) 
+                    if (magazine.ItemsRow.Name == article.MagazineName && magazine.IssueNumber == article.MagazineIssueNumber) 
                         searchedMagazines.Add(magazine);
                 }
                 
                 if (searchedMagazines == null || searchedMagazines.Count == 0)
                     return new List<Article>(0);
-                foreach (libraryDataSet.magazinesRow magazineRow in searchedMagazines)
+                foreach (libraryDataSet.MagazinesRow magazineRow in searchedMagazines)
                 {
-                    LibraryDataSet.articlesinmagazines.AddarticlesinmagazinesRow(articleRow, magazineRow);
+                    LibraryDataSet.ArticlesInMagazines.AddArticlesInMagazinesRow(articleRow, magazineRow);
                 }
-                libraryDataSet.copiesRow copy = LibraryDataSet.copies.AddcopiesRow(Guid.NewGuid().ToString(), itemRow, false);
+                libraryDataSet.CopiesRow copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), itemRow, false);
                 copy.ItemID = article.ID;
                 provider.UpdateAllData();
             }
@@ -124,16 +124,16 @@ namespace DataAccessLayer
         {
             author = null;
             LibraryDataSet = provider.GetAllData(dataType, targetFile);
-            foreach(libraryDataSet.authorsRow authorRow in LibraryDataSet.authors)
+            foreach(libraryDataSet.AuthorsRow authorRow in LibraryDataSet.Authors)
             {
                 if (authorRow.Name == article.AuthorName)
                     author = authorRow;
             }
-            foreach (libraryDataSet.articlesRow articleRow in LibraryDataSet.articles)
+            foreach (libraryDataSet.ArticlesRow articleRow in LibraryDataSet.Articles)
             {
-                libraryDataSet.articlesinmagazinesRow[] ArtAndMag = articleRow.GetarticlesinmagazinesRows();
-                if (articleRow.itemsRow.Name == article.Name && articleRow.itemsRow.Publisher == article.Publisher && articleRow.Version == article.Version && articleRow.authorsRow.Name == article.AuthorName &&
-                    article.MagazineName == ArtAndMag[0].magazinesRow.itemsRow.Name && article.MagazineIssueNumber == ArtAndMag[0].magazinesRow.IssueNumber)
+                libraryDataSet.ArticlesInMagazinesRow[] ArtAndMag = articleRow.GetArticlesInMagazinesRows();
+                if (articleRow.ItemsRow.Name == article.Name && articleRow.ItemsRow.Publisher == article.Publisher && articleRow.Version == article.Version && articleRow.AuthorsRow.Name == article.AuthorName &&
+                    article.MagazineName == ArtAndMag[0].MagazinesRow.ItemsRow.Name && article.MagazineIssueNumber == ArtAndMag[0].MagazinesRow.IssueNumber)
                     return false;
             }
             return true;

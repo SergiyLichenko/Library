@@ -13,8 +13,8 @@ namespace DataAccessLayer
         {
             List<User> allUsers = new List<User>();
 
-            DataRow[] users = LibraryDataSet.users.Select();
-            foreach(libraryDataSet.usersRow user in users)
+            DataRow[] users = LibraryDataSet.Users.Select();
+            foreach(libraryDataSet.UsersRow user in users)
             {
                 allUsers.Add(new User(user.ID, user.Name, user.UserName, user.Password, user.IsAdmin));
             }
@@ -25,18 +25,18 @@ namespace DataAccessLayer
         {
             List<Borrowing> borrows = new List<Borrowing>();
 
-            foreach(libraryDataSet.borrowsRow borrow in LibraryDataSet.borrows)
+            foreach(libraryDataSet.BorrowsRow borrow in LibraryDataSet.Borrows)
             {
                 Borrowing borStruct = new Borrowing();
                 borStruct.UserID = borrow.UserID;
-                borStruct.BorrowedDate = borrow.BorrowedDate;
+                borStruct.BorrowedDate = borrow.BorrowDate;
 
-                Copy copy = new Copy(borrow.copiesRow.ID, borrow.copiesRow.ItemID, borrow.copiesRow.IsBorrowed);
+                Copy copy = new Copy(borrow.CopiesRow.ID, borrow.CopiesRow.ItemID, borrow.CopiesRow.IsBorrowed);
                 borStruct.copy = copy;
 
-                libraryDataSet.booksRow[] bookRow = borrow.copiesRow.itemsRow.GetbooksRows();
-                Book book = new Book(borrow.copiesRow.itemsRow.ID,borrow.copiesRow.itemsRow.Name, borrow.copiesRow.itemsRow.Publisher, borrow.copiesRow.itemsRow.PublishedDate,
-                    bookRow[0].ISBN, bookRow[0].authorsRow.Name);
+                libraryDataSet.BooksRow[] bookRow = borrow.CopiesRow.ItemsRow.GetBooksRows();
+                Book book = new Book(borrow.CopiesRow.ItemsRow.ID,borrow.CopiesRow.ItemsRow.Name, borrow.CopiesRow.ItemsRow.Publisher, borrow.CopiesRow.ItemsRow.PublishedDate,
+                    bookRow[0].ISBN, bookRow[0].AuthorsRow.Name);
                 borStruct.book = book;
                 borrows.Add(borStruct);
             }
@@ -48,10 +48,10 @@ namespace DataAccessLayer
         {
             try
             {
-                libraryDataSet.copiesRow copy = LibraryDataSet.copies.FindByID(borrowForSave.CopyID);
+                libraryDataSet.CopiesRow copy = LibraryDataSet.Copies.FindByID(borrowForSave.CopyID);
                 copy.IsBorrowed = true;
-                libraryDataSet.usersRow user = LibraryDataSet.users.FindByID(borrowForSave.UserID);
-                LibraryDataSet.borrows.AddborrowsRow(copy, DateTime.Now.ToString(), user);
+                libraryDataSet.UsersRow user = LibraryDataSet.Users.FindByID(borrowForSave.UserID);
+                LibraryDataSet.Borrows.AddBorrowsRow(copy, DateTime.Now.ToString(), user);
                 provider.UpdateAllData();
                 return true;
             }
@@ -64,8 +64,8 @@ namespace DataAccessLayer
         {
             try
             {
-                LibraryDataSet.borrows.FindByCopyID(borrowForSaveAndDelete.CopyID).Delete();
-                LibraryDataSet.copies.FindByID(borrowForSaveAndDelete.CopyID).IsBorrowed = false;
+                LibraryDataSet.Borrows.FindByCopiesID(borrowForSaveAndDelete.CopyID).Delete();
+                LibraryDataSet.Copies.FindByID(borrowForSaveAndDelete.CopyID).IsBorrowed = false;
                 provider.UpdateAllData();
                 return true;
             }
@@ -77,22 +77,22 @@ namespace DataAccessLayer
         }
         public bool AddNewUser(User user)
         {
-            foreach(libraryDataSet.usersRow userRow in LibraryDataSet.users)
+            foreach(libraryDataSet.UsersRow userRow in LibraryDataSet.Users)
             {
                 if (userRow.Name==user.Name && userRow.Password.ToString() == user.Password.ToString() && userRow.IsAdmin == user.IsAdmin)
                     return false;
             }
 
-            LibraryDataSet.users.AddusersRow(user.ID, user.Name, user.UserName, user.Password.ToString(), user.IsAdmin);
+            LibraryDataSet.Users.AddUsersRow(user.ID, user.Name, user.UserName, user.Password.ToString(), user.IsAdmin);
             provider.UpdateAllData();
             return true;
         }
         public bool GetCurrentUser(string userName, string password, out User currentUser)
         {
             currentUser = null;
-            foreach(libraryDataSet.usersRow userRow in LibraryDataSet.users)
+            foreach(libraryDataSet.UsersRow userRow in LibraryDataSet.Users)
             {
-                if(userRow.UserName == userName && userRow.Password == password)
+                if(userRow.UserName == userName && userRow.Password.ToLowerInvariant() == password.ToLowerInvariant())
                 {
                     currentUser = new User(userRow.ID, userRow.Name, userRow.UserName, userRow.Password, userRow.IsAdmin);
                     return true;

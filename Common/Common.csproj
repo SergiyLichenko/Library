@@ -51,20 +51,15 @@
     <Compile Include="Book.cs" />
     <Compile Include="BorrowForSaveAndDelete.cs" />
     <Compile Include="Borrowing.cs" />
-    <Compile Include="DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Password.cs" />
-    <Compile Include="Copy.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="LibraryAction.cs" />
     <Compile Include="libraryDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>libraryDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Password.cs" />
+    <Compile Include="Copy.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="LibraryAction.cs" />
     <Compile Include="Magazine.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -77,16 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="libraryDataSet.xsc">
       <DependentUpon>libraryDataSet.xsd</DependentUpon>
     </None>

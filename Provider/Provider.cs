@@ -48,15 +48,15 @@ namespace Provider
             }
             this.libraryTables = new DataTable[]
             {
-                this.libraryDS.items,
-                this.libraryDS.authors,
-                this.libraryDS.books,
-                this.libraryDS.borrows,
-                this.libraryDS.copies,
-                this.libraryDS.magazines,
-                this.libraryDS.articles,
-                this.libraryDS.articlesinmagazines,
-                this.libraryDS.users
+                this.libraryDS.Items,
+                this.libraryDS.Authors,
+                this.libraryDS.Books,
+                this.libraryDS.Borrows,
+                this.libraryDS.Copies,
+                this.libraryDS.Magazines,
+                this.libraryDS.Articles,
+                this.libraryDS.ArticlesInMagazines,
+                this.libraryDS.Users
             
             };            
             this.tablesName = new string[]{"Items","Authors","Books","Borrows","Copies",

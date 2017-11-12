@@ -13,7 +13,7 @@ namespace DataAccessLayer
     {
         public List<Book> GetAllBooks()
         {
-            DataRow[] searchedRows = this.LibraryDataSet.books.Select();
+            DataRow[] searchedRows = this.LibraryDataSet.Books.Select();
             return GetRestPartsOfBook(searchedRows);            
         }
         private List<Book> GetRestPartsOfBook(DataRowCollection searchedRows)
@@ -21,23 +21,23 @@ namespace DataAccessLayer
             if (searchedRows == null || searchedRows.Count == 0)
                 return null;
             List<Book> books = new List<Book>();
-            foreach (libraryDataSet.booksRow bookRow in searchedRows)
+            foreach (libraryDataSet.BooksRow bookRow in searchedRows)
             {
                 Book book = new Book();
                 book.ISBN = bookRow.ISBN;
 
-                if (bookRow.itemsRow != null)
+                if (bookRow.ItemsRow != null)
                 {
-                    book.ID = bookRow.itemsRow.ID;
-                    book.Name = bookRow.itemsRow.Name;
-                    book.Publisher = bookRow.itemsRow.Publisher;
-                    book.PublishedDate = bookRow.itemsRow.PublishedDate;
+                    book.ID = bookRow.ItemsRow.ID;
+                    book.Name = bookRow.ItemsRow.Name;
+                    book.Publisher = bookRow.ItemsRow.Publisher;
+                    book.PublishedDate = bookRow.ItemsRow.PublishedDate;
                 }
                 else
                     throw new Exception("Cannot find corresponding Item");
 
-                if (bookRow.authorsRow != null)
-                    book.AuthorName = bookRow.authorsRow.Name;
+                if (bookRow.AuthorsRow != null)
+                    book.AuthorName = bookRow.AuthorsRow.Name;
                 else
                     throw new Exception("Cannot find corresponding Item");
                 books.Add(book);
@@ -51,23 +51,23 @@ namespace DataAccessLayer
                 return null;
 
             List<Book> books = new List<Book>();
-            foreach (libraryDataSet.booksRow bookRow in searchedRows)
+            foreach (libraryDataSet.BooksRow bookRow in searchedRows)
             {
                 Book book = new Book();
                 book.ISBN = bookRow.ISBN;
                                 
-                if (bookRow.itemsRow != null)
+                if (bookRow.ItemsRow != null)
                 {
-                    book.ID = bookRow.itemsRow.ID;
-                    book.Name = bookRow.itemsRow.Name;
-                    book.Publisher = bookRow.itemsRow.Publisher;
-                    book.PublishedDate = bookRow.itemsRow.PublishedDate;
+                    book.ID = bookRow.ItemsRow.ID;
+                    book.Name = bookRow.ItemsRow.Name;
+                    book.Publisher = bookRow.ItemsRow.Publisher;
+                    book.PublishedDate = bookRow.ItemsRow.PublishedDate;
                 }
                 else
                     throw new Exception("Cannot find corresponding Item");
 
-                if (bookRow.authorsRow != null)
-                    book.AuthorName = bookRow.authorsRow.Name;
+                if (bookRow.AuthorsRow != null)
+                    book.AuthorName = bookRow.AuthorsRow.Name;
                 else
                     throw new Exception("Cannot find corresponding Item");
                 books.Add(book);
@@ -79,32 +79,32 @@ namespace DataAccessLayer
         public List<Book> SearchedBooks(Book searchedBook)//можна було б починати з авторів, і за допомогою зовнішнього ключа переходити до таблиці Items(пошук по типізованих рядках)
         {
             //получаем набор найденных строк в таблице Items
-            libraryDataSet.itemsRow[] searchedItemsRows = (libraryDataSet.itemsRow[])LibraryDataSet.items.Select(MakeFilteredQuery(searchedBook.ItemFields));
+            libraryDataSet.ItemsRow[] searchedItemsRows = (libraryDataSet.ItemsRow[])LibraryDataSet.Items.Select(MakeFilteredQuery(searchedBook.ItemFields));
             //получаем набор найденных строк из таблицы Authors
-            libraryDataSet.authorsRow[] searchedAuthorsRows = (libraryDataSet.authorsRow[])LibraryDataSet.authors.Select(MakeFilteredQuery(searchedBook.AuthorFields));
+            libraryDataSet.AuthorsRow[] searchedAuthorsRows = (libraryDataSet.AuthorsRow[])LibraryDataSet.Authors.Select(MakeFilteredQuery(searchedBook.AuthorFields));
 
             //искать строки в таблице Books не стоит, поскольку поиск по полю ISBN не производится, а это поле заходится именно в таблицее Books
             if (searchedItemsRows.Length == 0 || searchedItemsRows == null || searchedAuthorsRows.Length == 0 || searchedAuthorsRows == null)
                 return new List<Book>(0);
 
             //создаем списки для набора строк Items и Books для более гибкого манипулирования эллементами массива
-            List<libraryDataSet.itemsRow> searchedItemsRowsList = searchedItemsRows.ToList<libraryDataSet.itemsRow>();
-            List<libraryDataSet.booksRow> searchedBooksRowsList = new List<libraryDataSet.booksRow>();
+            List<libraryDataSet.ItemsRow> searchedItemsRowsList = searchedItemsRows.ToList<libraryDataSet.ItemsRow>();
+            List<libraryDataSet.BooksRow> searchedBooksRowsList = new List<libraryDataSet.BooksRow>();
 
             //заполняем список книг searchedBooksRowsList, для каждой записи в таблице Items существует всего одна запись в таблице Books
-            foreach (libraryDataSet.itemsRow itemRow in searchedItemsRowsList)
+            foreach (libraryDataSet.ItemsRow itemRow in searchedItemsRowsList)
             {
-                libraryDataSet.booksRow[] bookRows = itemRow.GetbooksRows();
+                libraryDataSet.BooksRow[] bookRows = itemRow.GetBooksRows();
                 if (bookRows != null && bookRows.Length != 0)
                     searchedBooksRowsList.Add(bookRows[0]);
             }
             //конечный набор искомых строк
-            List<libraryDataSet.booksRow> final = new List<libraryDataSet.booksRow>();
+            List<libraryDataSet.BooksRow> final = new List<libraryDataSet.BooksRow>();
             
             //выбираем те книги, которые написаны данным автором
             for (int i = 0; i < searchedAuthorsRows.Length; i++)
             {
-                List<libraryDataSet.booksRow> temp = searchedBooksRowsList.FindAll(val => val.AuthorID == searchedAuthorsRows[i].ID);
+                List<libraryDataSet.BooksRow> temp = searchedBooksRowsList.FindAll(val => val.AuthorID == searchedAuthorsRows[i].ID);
                 if (temp != null && temp.Count != 0)
                     final.AddRange(temp);
             }
@@ -124,13 +124,13 @@ namespace DataAccessLayer
                 bool canAdd = IsUniqueBookinDB(b,out authorRow);
                 if (!canAdd)
                 {
-                    DataRow[] items = LibraryDataSet.items.Select(String.Format("Name = '{0}' and Publisher = '{1}'",b.Name,b.Publisher));
+                    DataRow[] items = LibraryDataSet.Items.Select(String.Format("Name = '{0}' and Publisher = '{1}'",b.Name,b.Publisher));
                     
-                    foreach(libraryDataSet.itemsRow item in items)
+                    foreach(libraryDataSet.ItemsRow item in items)
                     {
-                        if(item.GetbooksRows()[0].authorsRow.Name == b.Name)
+                        if(item.GetBooksRows()[0].AuthorsRow.Name == b.Name)
                         {
-                            libraryDataSet.copiesRow Copy = LibraryDataSet.copies.AddcopiesRow(Guid.NewGuid().ToString(), item, false);
+                            libraryDataSet.CopiesRow Copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), item, false);
                             Copy.ItemID = item.ID;
                             provider.UpdateAllData();
                         }
@@ -141,19 +141,19 @@ namespace DataAccessLayer
                     continue;
                 }
                 
-                libraryDataSet.itemsRow itemRow = LibraryDataSet.items.AdditemsRow(b.ID, b.Name, b.Publisher, b.PublishedDate);
+                libraryDataSet.ItemsRow itemRow = LibraryDataSet.Items.AddItemsRow(b.ID, b.Name, b.Publisher, b.PublishedDate);
                 //если такого автора еще не было
-                libraryDataSet.authorsRow author;
+                libraryDataSet.AuthorsRow author;
                 if (authorRow == null)
-                    author = LibraryDataSet.authors.AddauthorsRow(Guid.NewGuid().ToString(), b.AuthorName);
+                    author = LibraryDataSet.Authors.AddAuthorsRow(Guid.NewGuid().ToString(), b.AuthorName);
                 else
-                    author =(libraryDataSet.authorsRow) authorRow;
-                libraryDataSet.booksRow book=LibraryDataSet.books.AddbooksRow(itemRow,b.ISBN,author);
+                    author =(libraryDataSet.AuthorsRow) authorRow;
+                libraryDataSet.BooksRow book=LibraryDataSet.Books.AddBooksRow(itemRow, author, b.ISBN);
                 book.AuthorID = author.ID;
-                book.authorsRow=author;
-                if (book.authorsRow==null)
+                book.AuthorsRow=author;
+                if (book.AuthorsRow==null)
                     return new List<Book>(0);
-                libraryDataSet.copiesRow copy = LibraryDataSet.copies.AddcopiesRow(Guid.NewGuid().ToString(), itemRow, false);
+                libraryDataSet.CopiesRow copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), itemRow, false);
                 copy.ItemID = b.ID;
                 provider.UpdateAllData();
             }
@@ -164,14 +164,14 @@ namespace DataAccessLayer
         {
             authorRow = null;
             LibraryDataSet = provider.GetAllData(dataType, targetFile);
-            foreach (libraryDataSet.booksRow bookRow in LibraryDataSet.books)
+            foreach (libraryDataSet.BooksRow bookRow in LibraryDataSet.Books)
             {
-                if (bookRow.itemsRow.Name == b.Name && bookRow.authorsRow.Name==b.AuthorName &&
-                    bookRow.itemsRow.Publisher == b.Publisher)
+                if (bookRow.ItemsRow.Name == b.Name && bookRow.AuthorsRow.Name==b.AuthorName &&
+                    bookRow.ItemsRow.Publisher == b.Publisher)
                     return false;                
             }
             provider.FillAuthors();
-            foreach (libraryDataSet.authorsRow author in LibraryDataSet.authors)
+            foreach (libraryDataSet.AuthorsRow author in LibraryDataSet.Authors)
             {
                 if (author.Name == b.AuthorName)
                     authorRow = author;
@@ -189,19 +189,19 @@ namespace DataAccessLayer
             string authorID=String.Empty;
             try
             {
-                libraryDataSet.booksRow bookRow = LibraryDataSet.books.FindByItemID(book.ID);
-                authorID = bookRow.authorsRow.ID;
-                bookRow.itemsRow.Name = book.Name;
-                bookRow.itemsRow.Publisher = book.Publisher;
-                bookRow.itemsRow.PublishedDate = book.PublishedDate;
+                libraryDataSet.BooksRow bookRow = LibraryDataSet.Books.FindByItemID(book.ID);
+                authorID = bookRow.AuthorsRow.ID;
+                bookRow.ItemsRow.Name = book.Name;
+                bookRow.ItemsRow.Publisher = book.Publisher;
+                bookRow.ItemsRow.PublishedDate = book.PublishedDate;
                 
                 if (author == null)
                 {
-                    libraryDataSet.authorsRow authorRow = LibraryDataSet.authors.AddauthorsRow(Guid.NewGuid().ToString(), book.AuthorName);
-                    bookRow.authorsRow = authorRow;                    
+                    libraryDataSet.AuthorsRow authorRow = LibraryDataSet.Authors.AddAuthorsRow(Guid.NewGuid().ToString(), book.AuthorName);
+                    bookRow.AuthorsRow = authorRow;                    
                 }
                 else                
-                    bookRow.authorsRow = (libraryDataSet.authorsRow)author;
+                    bookRow.AuthorsRow = (libraryDataSet.AuthorsRow)author;
                 
                 provider.UpdateAllData();
                 provider.DeleteAuthor(authorID);
@@ -217,7 +217,7 @@ namespace DataAccessLayer
             if (copies == null || copies.Length == 0)
                 return new List<Copy>(0);
             List<Copy> allCopies = new List<Copy>();
-            foreach(libraryDataSet.copiesRow copy in copies)
+            foreach(libraryDataSet.CopiesRow copy in copies)
             {
                 Copy tempCopy = new Copy(copy.ID, copy.ItemID, copy.IsBorrowed);
                 if (tempCopy != null)
@@ -231,11 +231,11 @@ namespace DataAccessLayer
             {
                 if (searchedID == null || searchedID == String.Empty)
                     return new List<Copy>(0);
-                foreach (libraryDataSet.itemsRow item in LibraryDataSet.items)
+                foreach (libraryDataSet.ItemsRow item in LibraryDataSet.Items)
                 {
                     if (item.ID == searchedID)
                     {
-                        DataRow[] copies = item.GetChildRows("Copies-Items");
+                        DataRow[] copies = item.GetChildRows("To_Items");
                         return GetRestPartsOfCopies(copies);
                     }
                 }

@@ -207,12 +207,12 @@
             this.contextMenuStrip_Books.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showAllCopiesToolStripMenuItem});
             this.contextMenuStrip_Books.Name = "contextMenuStrip_Books";
-            this.contextMenuStrip_Books.Size = new System.Drawing.Size(177, 30);
+            this.contextMenuStrip_Books.Size = new System.Drawing.Size(171, 28);
             // 
             // showAllCopiesToolStripMenuItem
             // 
             this.showAllCopiesToolStripMenuItem.Name = "showAllCopiesToolStripMenuItem";
-            this.showAllCopiesToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.showAllCopiesToolStripMenuItem.Size = new System.Drawing.Size(170, 24);
             this.showAllCopiesToolStripMenuItem.Text = "&Выдать книгу";
             this.showAllCopiesToolStripMenuItem.Click += new System.EventHandler(this.showAllCopiesToolStripMenuItem_Click);
             // 

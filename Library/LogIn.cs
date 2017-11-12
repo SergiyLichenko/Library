@@ -31,10 +31,8 @@ namespace Library
         private void LogIn_Load(object sender, EventArgs e)
         {
             radioButton_MySql_CheckedChanged(null, null);
-            textBox_DataSource.Text = "(localdb)\\ProjectsV13";
+            textBox_DataSource.Text = ".\\SQLEXPRESS";
             textBox_InitialDialog.Text = "Library";
-            
-            
         }
 
         private void radioButton_XML_CheckedChanged(object sender, EventArgs e)
