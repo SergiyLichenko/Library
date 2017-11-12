@@ -55,9 +55,9 @@ namespace Library
                     {
                         Source s = new Source();
                         s.BorrowedDate = bor.BorrowedDate;
-                        s.CopyID = bor.copy.ID;
-                        s.ItemID = bor.copy.ItemID;
-                        s.IsBorrowed = bor.copy.isBorrowed;
+                        s.CopyID = bor.copy.Id;
+                        s.ItemID = bor.copy.ItemId;
+                        s.IsBorrowed = bor.copy.IsBorrowed;
                         source.Add(s);
 
                     }
@@ -80,7 +80,7 @@ namespace Library
                 string itemID = dataGridView_Copies.Rows[e.RowIndex].Cells["ItemID"].Value.ToString();
                 foreach (Borrowing bor in borrows)
                 {
-                    if (bor.copy.ItemID == itemID)
+                    if (bor.copy.ItemId == itemID)
                     {
                         this.textBox_AuthorOrigin.Text = bor.book.AuthorName;
                         this.textBox_NameOrigin.Text = bor.book.Name;
