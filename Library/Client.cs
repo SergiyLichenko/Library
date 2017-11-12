@@ -30,12 +30,12 @@ namespace Library
                 DAL = new DataAccessLayer.DataAccessLayer(logIn.dataType, logIn.ConnectionParameters);
 
             Authorization authorization = new Authorization();
-            authorization.LookInDB += this.Authorization_LookInDB;
+            authorization.LookInDb += this.Authorization_LookInDB;
             if (authorization.ShowDialog() == DialogResult.OK)
                 MessageBox.Show("\tАвторизация пройдена\nВы вошли под именем " + this.currentUser.UserName + ", Admin - " + this.currentUser.IsAdmin + "\n\nВаше настоящее имя " + this.currentUser.Name);
             else
                 return;
-            authorization.LookInDB -= this.Authorization_LookInDB;
+            authorization.LookInDb -= this.Authorization_LookInDB;
 
             InitializeComponent();
           

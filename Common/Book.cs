@@ -1,44 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common
 {
-    public class Book:Item
+    public class Book : Item
     {
         public string ISBN { get; set; }
         public string AuthorName { get; set; }
 
-        public Dictionary<string, string> ItemFields { get; private set; }
-        public Dictionary<string, string> AuthorFields { get; private set; }
-        public Dictionary<string, string> BookFields { get; private set; }
+        public Dictionary<string, string> ItemFields { get; }
+        public Dictionary<string, string> AuthorFields { get; }
+        public Dictionary<string, string> BookFields { get; }
 
         public Book() { }
-        public Book(string name,string publisher,string publishedDate,string isbn,string authorName):
-            this (String.Empty,name,publisher,publishedDate,isbn,authorName){}
+        public Book(string name, string publisher, string publishedDate, string isbn, string authorName) :
+            this(String.Empty, name, publisher, publishedDate, isbn, authorName)
+        { }
 
-        public Book(string id, string name, string publisher, string publishedDate, string isbn, string authorName)
+        public Book(string id, string name, string publisher, string publishedDate,
+            string isbn, string authorName)
         {
-            this.ID = id;
-            this.Name = name;
-            this.Publisher = publisher;
-            this.PublishedDate = publishedDate;
-            this.ISBN = isbn;
-            this.AuthorName = authorName;
+            if(string.IsNullOrWhiteSpace(id)) throw new ArgumentException(nameof(id));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
+            if (string.IsNullOrWhiteSpace(publisher)) throw new ArgumentException(nameof(publisher));
+            if (string.IsNullOrWhiteSpace(publishedDate)) throw new ArgumentException(nameof(publishedDate));
+            if (string.IsNullOrWhiteSpace(isbn)) throw new ArgumentException(nameof(isbn));
+            if (string.IsNullOrWhiteSpace(authorName)) throw new ArgumentException(nameof(authorName));
 
-            ItemFields = new Dictionary<string, string>(3);            
-            ItemFields.Add("Name", Name);
-            ItemFields.Add("Publisher", Publisher);
-            ItemFields.Add("PublishedDate", PublishedDate);
+            ID = id;
+            Name = name;
+            Publisher = publisher;
+            PublishedDate = publishedDate;
+            ISBN = isbn;
+            AuthorName = authorName;
 
-            AuthorFields = new Dictionary<string, string>(1);
-            AuthorFields.Add("Name", AuthorName);
+            ItemFields = new Dictionary<string, string>(3)
+            {
+                {"Name", Name},
+                {"Publisher", Publisher},
+                {"PublishedDate", PublishedDate}
+            };
 
-            BookFields = new Dictionary<string, string>(1);
-            BookFields.Add("ISBN", ISBN);
+            AuthorFields = new Dictionary<string, string>(1) {{"Name", AuthorName}};
+
+            BookFields = new Dictionary<string, string>(1) {{"ISBN", ISBN}};
         }
-
     }
 }

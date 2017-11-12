@@ -12,7 +12,7 @@ namespace Common
         public string MagazineIssueNumber { get; private set; }
         public string AuthorName { get; private set; }
         public string Version { get; private set; }
-                                    //для разных табличек - разные Dictionary
+                                    
         public Dictionary<string, string> ItemFields { get; private set; }
         public Dictionary<string, string> MagazineFields { get; private set; }
         public Dictionary<string, string> AuthorFields { get; private set; }
@@ -27,14 +27,14 @@ namespace Common
         public Article(string id, string name, string publisher, string publishedDate, string magazineName,
             string magazineIssueNumber, string author, string version)
         {
-            this.ID = id;
-            this.Name = name;
-            this.Publisher = publisher;
-            this.PublishedDate = publishedDate;
-            this.MagazineName = magazineName;
-            this.MagazineIssueNumber = magazineIssueNumber;
-            this.AuthorName = author;
-            this.Version = version;
+            ID = id;
+            Name = name;
+            Publisher = publisher;
+            PublishedDate = publishedDate;
+            MagazineName = magazineName;
+            MagazineIssueNumber = magazineIssueNumber;
+            AuthorName = author;
+            Version = version;
 
             ItemFields = new Dictionary<string, string>(3);
             ItemFields.Add("Name", Name);

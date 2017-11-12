@@ -7,15 +7,20 @@ namespace DataAccessLayer
     public partial class DataAccessLayer
     {
         private libraryDataSet _libraryDataSet;
-        private readonly Provider.Provider _provider = new Provider.Provider();
+        private readonly Provider.Provider _provider;
         private readonly SourceType _dataType;
         private readonly string _targetFile;
 
         public DataAccessLayer(SourceType dataType, string targetFile)
         {
+            if (string.IsNullOrWhiteSpace(nameof(targetFile))) throw new ArgumentException(nameof(targetFile));
+
             _dataType = dataType;
             _targetFile = targetFile;
             _libraryDataSet = _provider.GetAllData(dataType, targetFile);
+
+
+            _provider = new Provider.Provider();
         }
 
         private string MakeFilteredQuery(Dictionary<string, string> searchedTable)
@@ -34,7 +39,5 @@ namespace DataAccessLayer
             }
             return query;
         }
-
-        
     }
 }
