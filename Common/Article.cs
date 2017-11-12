@@ -25,23 +25,14 @@ namespace Common
         public Article(string id, string name, string publisher, string publishedDate, string magazineName,
             string magazineIssueNumber, string author, string version)
         {
-            if(string.IsNullOrWhiteSpace(id)) throw new ArgumentException(nameof(id));
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
-            if (string.IsNullOrWhiteSpace(publisher)) throw new ArgumentException(nameof(publisher));
-            if (string.IsNullOrWhiteSpace(publishedDate)) throw new ArgumentException(nameof(publishedDate));
-            if (string.IsNullOrWhiteSpace(magazineName)) throw new ArgumentException(nameof(magazineName));
-            if (string.IsNullOrWhiteSpace(magazineIssueNumber)) throw new ArgumentException(nameof(magazineIssueNumber));
-            if (string.IsNullOrWhiteSpace(author)) throw new ArgumentException(nameof(author));
-            if (string.IsNullOrWhiteSpace(version)) throw new ArgumentException(nameof(version));
-
-            ID = id;
-            Name = name;
-            Publisher = publisher;
-            PublishedDate = publishedDate;
-            MagazineName = magazineName;
-            MagazineIssueNumber = magazineIssueNumber;
-            AuthorName = author;
-            Version = version;
+            ID = id ?? throw new ArgumentNullException(nameof(id));
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Publisher = publisher ?? throw new ArgumentNullException(nameof(publisher));
+            PublishedDate = publishedDate ?? throw new ArgumentNullException(nameof(publishedDate));
+            MagazineName = magazineName ?? throw new ArgumentNullException(nameof(magazineName));
+            MagazineIssueNumber = magazineIssueNumber ?? throw new ArgumentNullException(nameof(magazineIssueNumber));
+            AuthorName = author ?? throw new ArgumentNullException(nameof(author));
+            Version = version ?? throw new ArgumentNullException(nameof(version));
 
             ItemFields = new Dictionary<string, string>(3)
             {

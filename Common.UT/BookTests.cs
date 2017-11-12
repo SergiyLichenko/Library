@@ -28,7 +28,7 @@ namespace Common.UT
             Action constructor = () => new Book(id, name, publisher, publishedDate, isbn, authorName);
 
             //Assert
-            constructor.ShouldThrow<ArgumentException>();
+            constructor.ShouldThrow<ArgumentNullException>();
         }
 
         [Theory]
@@ -100,23 +100,11 @@ namespace Common.UT
 
         public static IEnumerable<object[]> InvalidConstructorArguments => new[]
         {
-            new object[] { string.Empty, "name", "publisher", "publishedDate", "isbn", "authorName"},
-            new object[] {"   ", "name", "publisher", "publishedDate", "isbn", "authorName"},
             new object[] {null, "name", "publisher", "publishedDate", "isbn", "authorName"},
-            new object[] {"id", string.Empty, "publisher", "publishedDate", "isbn", "authorName"},
-            new object[] {"id", "   ", "publisher", "publishedDate", "isbn", "authorName"},
             new object[] {"id", null, "publisher", "publishedDate", "isbn", "authorName"},
-            new object[] {"id", "name", string.Empty, "publishedDate", "isbn", "authorName"},
-            new object[] {"id", "name", "   ", "publishedDate", "isbn", "authorName"},
             new object[] {"id", "name", null, "publishedDate", "isbn", "authorName"},
-            new object[] {"id", "name", "publisher", string.Empty, "isbn", "authorName"},
-            new object[] {"id", "name", "publisher", "   ", "isbn", "authorName"},
             new object[] {"id", "name", "publisher", null, "isbn", "authorName"},
-            new object[] {"id", "name", "publisher", "publishedDate", string.Empty, "authorName"},
-            new object[] {"id", "name", "publisher", "publishedDate", "   ", "authorName"},
             new object[] {"id", "name", "publisher", "publishedDate", null, "authorName"},
-            new object[] {"id", "name", "publisher", "publishedDate", "isbn", string.Empty},
-            new object[] {"id", "name", "publisher", "publishedDate", "isbn", "   "},
             new object[] {"id", "name", "publisher", "publishedDate", "isbn", null},
         };
 

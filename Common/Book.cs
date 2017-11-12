@@ -20,19 +20,12 @@ namespace Common
         public Book(string id, string name, string publisher, string publishedDate,
             string isbn, string authorName)
         {
-            if(string.IsNullOrWhiteSpace(id)) throw new ArgumentException(nameof(id));
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
-            if (string.IsNullOrWhiteSpace(publisher)) throw new ArgumentException(nameof(publisher));
-            if (string.IsNullOrWhiteSpace(publishedDate)) throw new ArgumentException(nameof(publishedDate));
-            if (string.IsNullOrWhiteSpace(isbn)) throw new ArgumentException(nameof(isbn));
-            if (string.IsNullOrWhiteSpace(authorName)) throw new ArgumentException(nameof(authorName));
-
-            ID = id;
-            Name = name;
-            Publisher = publisher;
-            PublishedDate = publishedDate;
-            ISBN = isbn;
-            AuthorName = authorName;
+            ID = id ?? throw new ArgumentNullException(nameof(id));
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Publisher = publisher ?? throw new ArgumentNullException(nameof(publisher));
+            PublishedDate = publishedDate ?? throw new ArgumentNullException(nameof(publishedDate));
+            ISBN = isbn ?? throw new ArgumentNullException(nameof(isbn));
+            AuthorName = authorName ?? throw new ArgumentNullException(nameof(authorName));
 
             ItemFields = new Dictionary<string, string>(3)
             {

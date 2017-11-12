@@ -67,7 +67,7 @@ namespace Library
             }
            
                 Book searchedBook = new Book(textBox_BookName.Text.Trim(), textBox_BookPublisher.Text.Trim(),
-                    String.Empty, null, textBox_BookAuthor.Text.Trim());
+                    String.Empty, string.Empty, textBox_BookAuthor.Text.Trim());
                 books = DAL.SearchedBooks(searchedBook);
                 if (books == null)
                     dataGridView_Books.DataSource = null;

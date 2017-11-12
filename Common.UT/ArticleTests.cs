@@ -31,7 +31,7 @@ namespace Common.UT
                 magazineName, magazineIssueNumber, author, version);
 
             //Assert
-            constructor.ShouldThrow<ArgumentException>();
+            constructor.ShouldThrow<ArgumentNullException>();
         }
 
         [Theory]
@@ -136,29 +136,13 @@ namespace Common.UT
 
         public static IEnumerable<object[]> InvalidConstructorArguments => new[]
         {
-            new object[] { string.Empty, "name", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "author", "version"},
-            new object[] { "   ", "name", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "author", "version"},
             new object[] { null, "name", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "author", "version"},
-            new object[] { "id", string.Empty, "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "author", "version"},
-            new object[] { "id", "   ", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "author", "version"},
             new object[] { "id", null, "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "author", "version"},
-            new object[] { "id", "name", string.Empty, "publishedDate", "magazineName", "magazineIssueNumber", "author", "version"},
-            new object[] { "id", "name", "    ", "publishedDate", "magazineName", "magazineIssueNumber", "author", "version"},
             new object[] { "id", "name", null, "publishedDate", "magazineName", "magazineIssueNumber", "author", "version"},
-            new object[] { "id", "name", "publisher", string.Empty, "magazineName", "magazineIssueNumber", "author", "version"},
-            new object[] { "id", "name", "publisher", "   ", "magazineName", "magazineIssueNumber", "author", "version"},
             new object[] { "id", "name", "publisher", null, "magazineName", "magazineIssueNumber", "author", "version"},
-            new object[] { "id", "name", "publisher", "publishedDate", string.Empty, "magazineIssueNumber", "author", "version"},
-            new object[] { "id", "name", "publisher", "publishedDate", "   ", "magazineIssueNumber", "author", "version"},
             new object[] { "id", "name", "publisher", "publishedDate", null, "magazineIssueNumber", "author", "version"},
-            new object[] { "id", "name", "publisher", "publishedDate", "magazineName", string.Empty, "author", "version"},
-            new object[] { "id", "name", "publisher", "publishedDate", "magazineName", "   ", "author", "version"},
             new object[] { "id", "name", "publisher", "publishedDate", "magazineName", null, "author", "version"},
-            new object[] { "id", "name", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", string.Empty, "version"},
-            new object[] { "id", "name", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "   ", "version"},
             new object[] { "id", "name", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", null, "version"},
-            new object[] { "id", "name", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "author", string.Empty},
-            new object[] { "id", "name", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "author", "   "},
             new object[] { "id", "name", "publisher", "publishedDate", "magazineName", "magazineIssueNumber", "author", null}
         };
 

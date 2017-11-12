@@ -15,12 +15,10 @@ namespace DataAccessLayer
         {
             if (string.IsNullOrWhiteSpace(nameof(targetFile))) throw new ArgumentException(nameof(targetFile));
 
+            _provider = new Provider.Provider();
             _dataType = dataType;
             _targetFile = targetFile;
             _libraryDataSet = _provider.GetAllData(dataType, targetFile);
-
-
-            _provider = new Provider.Provider();
         }
 
         private string MakeFilteredQuery(Dictionary<string, string> searchedTable)
