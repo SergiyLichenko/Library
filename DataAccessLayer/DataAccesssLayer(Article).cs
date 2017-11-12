@@ -11,7 +11,7 @@ namespace DataAccessLayer
     {
         public List<Article> GetAllArticles()
         {
-            DataRow[] searchedArticles = LibraryDataSet.Articles.Select();
+            DataRow[] searchedArticles = _libraryDataSet.Articles.Select();
             return GetRestPartsOfArticles(searchedArticles);
         }
         private List<Article> GetRestPartsOfArticles(DataRow[] searchedArticles)
@@ -38,7 +38,7 @@ namespace DataAccessLayer
 
         public List<Article> SearchedArticles(Article searchedArticle)
         {
-            libraryDataSet.ItemsRow[] items = (libraryDataSet.ItemsRow[])LibraryDataSet.Items.Select(MakeFilteredQuery(searchedArticle.ItemFields));
+            libraryDataSet.ItemsRow[] items = (libraryDataSet.ItemsRow[])_libraryDataSet.Items.Select(MakeFilteredQuery(searchedArticle.ItemFields));
             if (items.Length == 0 && items == null)
                 return new List<Article>(0);
 
@@ -50,7 +50,7 @@ namespace DataAccessLayer
                     articles.Add(article[0]);
             }
             
-            libraryDataSet.AuthorsRow[] authors = (libraryDataSet.AuthorsRow[])LibraryDataSet.Authors.Select(MakeFilteredQuery(searchedArticle.AuthorFields));
+            libraryDataSet.AuthorsRow[] authors = (libraryDataSet.AuthorsRow[])_libraryDataSet.Authors.Select(MakeFilteredQuery(searchedArticle.AuthorFields));
             if (authors.Length == 0 && authors == null)
                 return new List<Article>(0);
 
@@ -77,28 +77,28 @@ namespace DataAccessLayer
                 
                 if (!isUnique)
                 {
-                    DataRow[] artRows = LibraryDataSet.Articles.Select(String.Format("Version = '{0}'", article.Version));
+                    DataRow[] artRows = _libraryDataSet.Articles.Select(String.Format("Version = '{0}'", article.Version));
                     foreach (libraryDataSet.ArticlesRow artRow in artRows)
                     {
                         if (artRow.ItemsRow.Name==article.Name && artRow.ItemsRow.Publisher == article.Publisher && artRow.AuthorsRow.Name == article.AuthorName)
                         {
-                            libraryDataSet.CopiesRow Copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), artRow.ItemsRow, false);
+                            libraryDataSet.CopiesRow Copy = _libraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), artRow.ItemsRow, false);
                             Copy.ItemID = artRow.ItemsRow.ID;
-                            provider.UpdateAllData();
+                            _provider.UpdateAllData();
                         }
                     }
                     notAdded.Add(article);
                     continue;
                 }
-                libraryDataSet.ItemsRow itemRow = LibraryDataSet.Items.AddItemsRow(article.ID, article.Name, article.Publisher, article.PublishedDate);
+                libraryDataSet.ItemsRow itemRow = _libraryDataSet.Items.AddItemsRow(article.ID, article.Name, article.Publisher, article.PublishedDate);
                 libraryDataSet.AuthorsRow authorRow;
                 if (author == null)
-                    authorRow = LibraryDataSet.Authors.AddAuthorsRow(Guid.NewGuid().ToString(), article.AuthorName);
+                    authorRow = _libraryDataSet.Authors.AddAuthorsRow(Guid.NewGuid().ToString(), article.AuthorName);
                 else
                     authorRow = (libraryDataSet.AuthorsRow)author;
-                libraryDataSet.ArticlesRow articleRow = LibraryDataSet.Articles.AddArticlesRow(itemRow, authorRow, article.Version );
+                libraryDataSet.ArticlesRow articleRow = _libraryDataSet.Articles.AddArticlesRow(itemRow, authorRow, article.Version );
 
-                DataRowCollection allMagazines = LibraryDataSet.Magazines.Rows;
+                DataRowCollection allMagazines = _libraryDataSet.Magazines.Rows;
                 List<libraryDataSet.MagazinesRow> searchedMagazines = new List<libraryDataSet.MagazinesRow>();
                 
                 foreach(libraryDataSet.MagazinesRow magazine in allMagazines)
@@ -111,11 +111,11 @@ namespace DataAccessLayer
                     return new List<Article>(0);
                 foreach (libraryDataSet.MagazinesRow magazineRow in searchedMagazines)
                 {
-                    LibraryDataSet.ArticlesInMagazines.AddArticlesInMagazinesRow(articleRow, magazineRow);
+                    _libraryDataSet.ArticlesInMagazines.AddArticlesInMagazinesRow(articleRow, magazineRow);
                 }
-                libraryDataSet.CopiesRow copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), itemRow, false);
+                libraryDataSet.CopiesRow copy = _libraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), itemRow, false);
                 copy.ItemID = article.ID;
-                provider.UpdateAllData();
+                _provider.UpdateAllData();
             }
             return notAdded;
         }
@@ -123,13 +123,13 @@ namespace DataAccessLayer
         private bool isUniqueArticleInDB(Article article, out DataRow author)
         {
             author = null;
-            LibraryDataSet = provider.GetAllData(dataType, targetFile);
-            foreach(libraryDataSet.AuthorsRow authorRow in LibraryDataSet.Authors)
+            _libraryDataSet = _provider.GetAllData(_dataType, _targetFile);
+            foreach(libraryDataSet.AuthorsRow authorRow in _libraryDataSet.Authors)
             {
                 if (authorRow.Name == article.AuthorName)
                     author = authorRow;
             }
-            foreach (libraryDataSet.ArticlesRow articleRow in LibraryDataSet.Articles)
+            foreach (libraryDataSet.ArticlesRow articleRow in _libraryDataSet.Articles)
             {
                 libraryDataSet.ArticlesInMagazinesRow[] ArtAndMag = articleRow.GetArticlesInMagazinesRows();
                 if (articleRow.ItemsRow.Name == article.Name && articleRow.ItemsRow.Publisher == article.Publisher && articleRow.Version == article.Version && articleRow.AuthorsRow.Name == article.AuthorName &&

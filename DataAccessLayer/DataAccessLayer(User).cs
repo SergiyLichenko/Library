@@ -13,7 +13,7 @@ namespace DataAccessLayer
         {
             List<User> allUsers = new List<User>();
 
-            DataRow[] users = LibraryDataSet.Users.Select();
+            DataRow[] users = _libraryDataSet.Users.Select();
             foreach(libraryDataSet.UsersRow user in users)
             {
                 allUsers.Add(new User(user.ID, user.Name, user.UserName, user.Password, user.IsAdmin));
@@ -25,7 +25,7 @@ namespace DataAccessLayer
         {
             List<Borrowing> borrows = new List<Borrowing>();
 
-            foreach(libraryDataSet.BorrowsRow borrow in LibraryDataSet.Borrows)
+            foreach(libraryDataSet.BorrowsRow borrow in _libraryDataSet.Borrows)
             {
                 Borrowing borStruct = new Borrowing();
                 borStruct.UserID = borrow.UserID;
@@ -48,11 +48,11 @@ namespace DataAccessLayer
         {
             try
             {
-                libraryDataSet.CopiesRow copy = LibraryDataSet.Copies.FindByID(borrowForSave.CopyID);
+                libraryDataSet.CopiesRow copy = _libraryDataSet.Copies.FindByID(borrowForSave.CopyID);
                 copy.IsBorrowed = true;
-                libraryDataSet.UsersRow user = LibraryDataSet.Users.FindByID(borrowForSave.UserID);
-                LibraryDataSet.Borrows.AddBorrowsRow(copy, DateTime.Now.ToString(), user);
-                provider.UpdateAllData();
+                libraryDataSet.UsersRow user = _libraryDataSet.Users.FindByID(borrowForSave.UserID);
+                _libraryDataSet.Borrows.AddBorrowsRow(copy, DateTime.Now.ToString(), user);
+                _provider.UpdateAllData();
                 return true;
             }
             catch
@@ -64,9 +64,9 @@ namespace DataAccessLayer
         {
             try
             {
-                LibraryDataSet.Borrows.FindByCopiesID(borrowForSaveAndDelete.CopyID).Delete();
-                LibraryDataSet.Copies.FindByID(borrowForSaveAndDelete.CopyID).IsBorrowed = false;
-                provider.UpdateAllData();
+                _libraryDataSet.Borrows.FindByCopiesID(borrowForSaveAndDelete.CopyID).Delete();
+                _libraryDataSet.Copies.FindByID(borrowForSaveAndDelete.CopyID).IsBorrowed = false;
+                _provider.UpdateAllData();
                 return true;
             }
             catch
@@ -77,20 +77,20 @@ namespace DataAccessLayer
         }
         public bool AddNewUser(User user)
         {
-            foreach(libraryDataSet.UsersRow userRow in LibraryDataSet.Users)
+            foreach(libraryDataSet.UsersRow userRow in _libraryDataSet.Users)
             {
                 if (userRow.Name==user.Name && userRow.Password.ToString() == user.Password.ToString() && userRow.IsAdmin == user.IsAdmin)
                     return false;
             }
 
-            LibraryDataSet.Users.AddUsersRow(user.ID, user.Name, user.UserName, user.Password.ToString(), user.IsAdmin);
-            provider.UpdateAllData();
+            _libraryDataSet.Users.AddUsersRow(user.ID, user.Name, user.UserName, user.Password.ToString(), user.IsAdmin);
+            _provider.UpdateAllData();
             return true;
         }
         public bool GetCurrentUser(string userName, string password, out User currentUser)
         {
             currentUser = null;
-            foreach(libraryDataSet.UsersRow userRow in LibraryDataSet.Users)
+            foreach(libraryDataSet.UsersRow userRow in _libraryDataSet.Users)
             {
                 if(userRow.UserName == userName && userRow.Password.ToLowerInvariant() == password.ToLowerInvariant())
                 {

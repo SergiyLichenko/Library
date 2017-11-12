@@ -13,7 +13,7 @@ namespace DataAccessLayer
     {
         public List<Book> GetAllBooks()
         {
-            DataRow[] searchedRows = this.LibraryDataSet.Books.Select();
+            DataRow[] searchedRows = this._libraryDataSet.Books.Select();
             return GetRestPartsOfBook(searchedRows);            
         }
         private List<Book> GetRestPartsOfBook(DataRowCollection searchedRows)
@@ -79,9 +79,9 @@ namespace DataAccessLayer
         public List<Book> SearchedBooks(Book searchedBook)//можна було б починати з авторів, і за допомогою зовнішнього ключа переходити до таблиці Items(пошук по типізованих рядках)
         {
             //получаем набор найденных строк в таблице Items
-            libraryDataSet.ItemsRow[] searchedItemsRows = (libraryDataSet.ItemsRow[])LibraryDataSet.Items.Select(MakeFilteredQuery(searchedBook.ItemFields));
+            libraryDataSet.ItemsRow[] searchedItemsRows = (libraryDataSet.ItemsRow[])_libraryDataSet.Items.Select(MakeFilteredQuery(searchedBook.ItemFields));
             //получаем набор найденных строк из таблицы Authors
-            libraryDataSet.AuthorsRow[] searchedAuthorsRows = (libraryDataSet.AuthorsRow[])LibraryDataSet.Authors.Select(MakeFilteredQuery(searchedBook.AuthorFields));
+            libraryDataSet.AuthorsRow[] searchedAuthorsRows = (libraryDataSet.AuthorsRow[])_libraryDataSet.Authors.Select(MakeFilteredQuery(searchedBook.AuthorFields));
 
             //искать строки в таблице Books не стоит, поскольку поиск по полю ISBN не производится, а это поле заходится именно в таблицее Books
             if (searchedItemsRows.Length == 0 || searchedItemsRows == null || searchedAuthorsRows.Length == 0 || searchedAuthorsRows == null)
@@ -124,15 +124,15 @@ namespace DataAccessLayer
                 bool canAdd = IsUniqueBookinDB(b,out authorRow);
                 if (!canAdd)
                 {
-                    DataRow[] items = LibraryDataSet.Items.Select(String.Format("Name = '{0}' and Publisher = '{1}'",b.Name,b.Publisher));
+                    DataRow[] items = _libraryDataSet.Items.Select(String.Format("Name = '{0}' and Publisher = '{1}'",b.Name,b.Publisher));
                     
                     foreach(libraryDataSet.ItemsRow item in items)
                     {
                         if(item.GetBooksRows()[0].AuthorsRow.Name == b.Name)
                         {
-                            libraryDataSet.CopiesRow Copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), item, false);
+                            libraryDataSet.CopiesRow Copy = _libraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), item, false);
                             Copy.ItemID = item.ID;
-                            provider.UpdateAllData();
+                            _provider.UpdateAllData();
                         }
                     }
                     
@@ -141,21 +141,21 @@ namespace DataAccessLayer
                     continue;
                 }
                 
-                libraryDataSet.ItemsRow itemRow = LibraryDataSet.Items.AddItemsRow(b.ID, b.Name, b.Publisher, b.PublishedDate);
+                libraryDataSet.ItemsRow itemRow = _libraryDataSet.Items.AddItemsRow(b.ID, b.Name, b.Publisher, b.PublishedDate);
                 //если такого автора еще не было
                 libraryDataSet.AuthorsRow author;
                 if (authorRow == null)
-                    author = LibraryDataSet.Authors.AddAuthorsRow(Guid.NewGuid().ToString(), b.AuthorName);
+                    author = _libraryDataSet.Authors.AddAuthorsRow(Guid.NewGuid().ToString(), b.AuthorName);
                 else
                     author =(libraryDataSet.AuthorsRow) authorRow;
-                libraryDataSet.BooksRow book=LibraryDataSet.Books.AddBooksRow(itemRow, author, b.ISBN);
+                libraryDataSet.BooksRow book=_libraryDataSet.Books.AddBooksRow(itemRow, author, b.ISBN);
                 book.AuthorID = author.ID;
                 book.AuthorsRow=author;
                 if (book.AuthorsRow==null)
                     return new List<Book>(0);
-                libraryDataSet.CopiesRow copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), itemRow, false);
+                libraryDataSet.CopiesRow copy = _libraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), itemRow, false);
                 copy.ItemID = b.ID;
-                provider.UpdateAllData();
+                _provider.UpdateAllData();
             }
             return notAdded;  
         }
@@ -163,15 +163,15 @@ namespace DataAccessLayer
         private bool IsUniqueBookinDB(Book b, out DataRow authorRow)
         {
             authorRow = null;
-            LibraryDataSet = provider.GetAllData(dataType, targetFile);
-            foreach (libraryDataSet.BooksRow bookRow in LibraryDataSet.Books)
+            _libraryDataSet = _provider.GetAllData(_dataType, _targetFile);
+            foreach (libraryDataSet.BooksRow bookRow in _libraryDataSet.Books)
             {
                 if (bookRow.ItemsRow.Name == b.Name && bookRow.AuthorsRow.Name==b.AuthorName &&
                     bookRow.ItemsRow.Publisher == b.Publisher)
                     return false;                
             }
-            provider.FillAuthors();
-            foreach (libraryDataSet.AuthorsRow author in LibraryDataSet.Authors)
+            _provider.FillAuthors();
+            foreach (libraryDataSet.AuthorsRow author in _libraryDataSet.Authors)
             {
                 if (author.Name == b.AuthorName)
                     authorRow = author;
@@ -189,7 +189,7 @@ namespace DataAccessLayer
             string authorID=String.Empty;
             try
             {
-                libraryDataSet.BooksRow bookRow = LibraryDataSet.Books.FindByItemID(book.ID);
+                libraryDataSet.BooksRow bookRow = _libraryDataSet.Books.FindByItemID(book.ID);
                 authorID = bookRow.AuthorsRow.ID;
                 bookRow.ItemsRow.Name = book.Name;
                 bookRow.ItemsRow.Publisher = book.Publisher;
@@ -197,14 +197,14 @@ namespace DataAccessLayer
                 
                 if (author == null)
                 {
-                    libraryDataSet.AuthorsRow authorRow = LibraryDataSet.Authors.AddAuthorsRow(Guid.NewGuid().ToString(), book.AuthorName);
+                    libraryDataSet.AuthorsRow authorRow = _libraryDataSet.Authors.AddAuthorsRow(Guid.NewGuid().ToString(), book.AuthorName);
                     bookRow.AuthorsRow = authorRow;                    
                 }
                 else                
                     bookRow.AuthorsRow = (libraryDataSet.AuthorsRow)author;
                 
-                provider.UpdateAllData();
-                provider.DeleteAuthor(authorID);
+                _provider.UpdateAllData();
+                _provider.DeleteAuthor(authorID);
                 return true;
             }
             catch(Exception)
@@ -231,7 +231,7 @@ namespace DataAccessLayer
             {
                 if (searchedID == null || searchedID == String.Empty)
                     return new List<Copy>(0);
-                foreach (libraryDataSet.ItemsRow item in LibraryDataSet.Items)
+                foreach (libraryDataSet.ItemsRow item in _libraryDataSet.Items)
                 {
                     if (item.ID == searchedID)
                     {
@@ -258,8 +258,8 @@ namespace DataAccessLayer
         {
             try
             {
-                LibraryDataSet.WriteXml(fileName+".xml");
-                LibraryDataSet.WriteXmlSchema(fileName+".xsd");
+                _libraryDataSet.WriteXml(fileName+".xml");
+                _libraryDataSet.WriteXmlSchema(fileName+".xsd");
             }
             catch
             {

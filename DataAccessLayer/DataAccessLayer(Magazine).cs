@@ -13,7 +13,7 @@ namespace DataAccessLayer
     {
         public List<Magazine> GetAllMagazines()
         {
-            DataRow[] magazines = this.LibraryDataSet.Magazines.Select();
+            DataRow[] magazines = this._libraryDataSet.Magazines.Select();
             return GetRestPartsOfMagazines(magazines);
         }
 
@@ -45,7 +45,7 @@ namespace DataAccessLayer
             else
                 filter = String.Format("Parent.Name Like '%{0}%' and Parent.Publisher Like '%{1}%' and Parent.PublishedDate Like '%{3}%' and IssueNumber Like '%{2}%'",
                 searchedMagazine.Name, searchedMagazine.Publisher, searchedMagazine.IssueNumber,searchedMagazine.PublishedDate);
-            DataRow[] searched = LibraryDataSet.Magazines.Select(filter);
+            DataRow[] searched = _libraryDataSet.Magazines.Select(filter);
 
             foreach(libraryDataSet.MagazinesRow magazine in searched)
             {
@@ -81,7 +81,7 @@ namespace DataAccessLayer
 
         private bool IsUniqueMagazineInDB(Magazine magazine)
         {
-            DataRow [] allMagazines = LibraryDataSet.Magazines.Select();
+            DataRow [] allMagazines = _libraryDataSet.Magazines.Select();
             if (allMagazines != null && allMagazines.Length == 0)
                 return true;
             foreach (libraryDataSet.MagazinesRow magazineRow in allMagazines)
@@ -105,25 +105,25 @@ namespace DataAccessLayer
                 
                 if (!isUnique)
                 {
-                    DataRow[] magazines = LibraryDataSet.Magazines.Select(String.Format("IssueNumber = '{0}'", magazine.IssueNumber));
+                    DataRow[] magazines = _libraryDataSet.Magazines.Select(String.Format("IssueNumber = '{0}'", magazine.IssueNumber));
 
                     foreach (libraryDataSet.MagazinesRow mag in magazines)
                     {
                         if (mag.ItemsRow.Name==magazine.Name && mag.ItemsRow.Publisher==magazine.Publisher)
                         {
-                            libraryDataSet.CopiesRow Copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), mag.ItemsRow, false);
+                            libraryDataSet.CopiesRow Copy = _libraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), mag.ItemsRow, false);
                             Copy.ItemID = mag.ItemsRow.ID;
-                            provider.UpdateAllData();
+                            _provider.UpdateAllData();
                         }
                     }
                     notUpdated.Add(magazine);
                     continue;
                 }
-                libraryDataSet.ItemsRow item = LibraryDataSet.Items.AddItemsRow(magazine.ID, magazine.Name, magazine.Publisher, magazine.PublishedDate);
-                LibraryDataSet.Magazines.AddMagazinesRow(item,magazine.IssueNumber);
-                libraryDataSet.CopiesRow copy = LibraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), item, false);
+                libraryDataSet.ItemsRow item = _libraryDataSet.Items.AddItemsRow(magazine.ID, magazine.Name, magazine.Publisher, magazine.PublishedDate);
+                _libraryDataSet.Magazines.AddMagazinesRow(item,magazine.IssueNumber);
+                libraryDataSet.CopiesRow copy = _libraryDataSet.Copies.AddCopiesRow(Guid.NewGuid().ToString(), item, false);
                 copy.ItemID = magazine.ID;
-                provider.UpdateAllData();
+                _provider.UpdateAllData();
             }
             return notUpdated;
         }

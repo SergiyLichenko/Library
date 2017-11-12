@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common;
-using Provider;
 
 namespace DataAccessLayer
 {
     public partial class DataAccessLayer
     {
-        libraryDataSet LibraryDataSet;
-        Provider.Provider provider = new Provider.Provider();
-        SourceType dataType;
-        string targetFile;
+        private libraryDataSet _libraryDataSet;
+        private readonly Provider.Provider _provider = new Provider.Provider();
+        private readonly SourceType _dataType;
+        private readonly string _targetFile;
+
         public DataAccessLayer(SourceType dataType, string targetFile)
         {
-            this.dataType = dataType;
-            this.targetFile = targetFile;
-            this.LibraryDataSet = this.provider.GetAllData(dataType, targetFile);
+            _dataType = dataType;
+            _targetFile = targetFile;
+            _libraryDataSet = _provider.GetAllData(dataType, targetFile);
         }
+
         private string MakeFilteredQuery(Dictionary<string, string> searchedTable)
         {
             string query = String.Empty;
@@ -27,12 +25,12 @@ namespace DataAccessLayer
                 return query;
             foreach (KeyValuePair<string, string> row in searchedTable)
             {
-                if (row.Value == null || row.Value == String.Empty)
+                if (string.IsNullOrEmpty(row.Value))
                     continue;
                 if (query == String.Empty)
-                    query += String.Format("[{0}] like '%{1}%'", row.Key, row.Value);
+                    query += $"[{row.Key}] like '%{row.Value}%'";
                 else
-                    query += String.Format(" and [{0}] like '%{1}%'", row.Key, row.Value);
+                    query += $" and [{row.Key}] like '%{row.Value}%'";
             }
             return query;
         }
