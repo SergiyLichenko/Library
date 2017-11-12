@@ -44,7 +44,6 @@ namespace Common.UT
             constructor.ShouldNotThrow();
         }
 
-
         [Theory]
         [MemberData(nameof(ValidConstructorArguments))]
         public void Book_Constructor_should_set_correct_items_fields(
