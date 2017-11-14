@@ -54,7 +54,10 @@ namespace Provider
             };
             _libraryDataAdapters = new SqlDataAdapter[_tablesName.Length];
             for (int i = 0; i < _tablesName.Length; i++)
+            {
                 _libraryDataAdapters[i] = new SqlDataAdapter("Select * from " + _tablesName[i], targetFile);
+                new SqlCommandBuilder(_libraryDataAdapters[i]);
+            }
 
             for (int i = 0; i < _tablesName.Length; i++)
                 _libraryDataAdapters[i].Fill(_libraryTables[i]);
