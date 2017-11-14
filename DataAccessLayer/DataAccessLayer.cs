@@ -26,7 +26,7 @@ namespace DataAccessLayer
             string query = String.Empty;
             if (searchedTable == null)
                 return query;
-            foreach (KeyValuePair<string, string> row in searchedTable)
+            foreach (var row in searchedTable)
             {
                 if (string.IsNullOrEmpty(row.Value))
                     continue;

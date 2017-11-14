@@ -59,7 +59,6 @@
     <Compile Include="Password.cs" />
     <Compile Include="Copy.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="LibraryAction.cs" />
     <Compile Include="Magazine.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

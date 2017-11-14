@@ -119,7 +119,7 @@
             this.checkBox_WindowsAuthetication.Size = new System.Drawing.Size(15, 14);
             this.checkBox_WindowsAuthetication.TabIndex = 11;
             this.checkBox_WindowsAuthetication.UseVisualStyleBackColor = true;
-            this.checkBox_WindowsAuthetication.CheckedChanged += new System.EventHandler(this.checkBox_WindowsAuthetication_CheckedChanged);
+            this.checkBox_WindowsAuthetication.CheckedChanged += new System.EventHandler(this.CheckBox_WindowsAuthetication_CheckedChanged);
             // 
             // textBox_ConnectionString
             // 
@@ -137,7 +137,7 @@
             this.textBox_UserPassword.Name = "textBox_UserPassword";
             this.textBox_UserPassword.Size = new System.Drawing.Size(159, 20);
             this.textBox_UserPassword.TabIndex = 9;
-            this.textBox_UserPassword.Leave += new System.EventHandler(this.textBox_UserPassword_Leave);
+            this.textBox_UserPassword.Leave += new System.EventHandler(this.TextBox_UserPassword_Leave);
             // 
             // textBox_UserLogin
             // 
@@ -145,7 +145,7 @@
             this.textBox_UserLogin.Name = "textBox_UserLogin";
             this.textBox_UserLogin.Size = new System.Drawing.Size(159, 20);
             this.textBox_UserLogin.TabIndex = 8;
-            this.textBox_UserLogin.Leave += new System.EventHandler(this.textBox_UserLogin_Leave);
+            this.textBox_UserLogin.Leave += new System.EventHandler(this.TextBox_UserLogin_Leave);
             // 
             // textBox_InitialDialog
             // 
@@ -153,7 +153,7 @@
             this.textBox_InitialDialog.Name = "textBox_InitialDialog";
             this.textBox_InitialDialog.Size = new System.Drawing.Size(159, 20);
             this.textBox_InitialDialog.TabIndex = 7;
-            this.textBox_InitialDialog.Leave += new System.EventHandler(this.textBox_InitialDialog_Leave);
+            this.textBox_InitialDialog.Leave += new System.EventHandler(this.TextBox_InitialDialog_Leave);
             // 
             // textBox_DataSource
             // 
@@ -161,7 +161,7 @@
             this.textBox_DataSource.Name = "textBox_DataSource";
             this.textBox_DataSource.Size = new System.Drawing.Size(159, 20);
             this.textBox_DataSource.TabIndex = 6;
-            this.textBox_DataSource.Leave += new System.EventHandler(this.textBox_DataSource_Leave);
+            this.textBox_DataSource.Leave += new System.EventHandler(this.TextBox_DataSource_Leave);
             // 
             // label_ConnectionString
             // 
@@ -259,7 +259,7 @@
             this.button_lookXMLData.TabIndex = 7;
             this.button_lookXMLData.Text = "Look XML Data";
             this.button_lookXMLData.UseVisualStyleBackColor = true;
-            this.button_lookXMLData.Click += new System.EventHandler(this.button_lookXMLData_Click);
+            this.button_lookXMLData.Click += new System.EventHandler(this.Button_lookXMLData_Click);
             // 
             // button1
             // 
@@ -270,7 +270,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // button2
             // 
@@ -281,7 +281,7 @@
             this.button2.TabIndex = 9;
             this.button2.Text = "Connect";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // LogIn
             // 

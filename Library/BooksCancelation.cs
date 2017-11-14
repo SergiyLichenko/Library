@@ -1,129 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Common;
+
 namespace Library
 {
     public partial class BooksCancelation : Form
     {
-        List<User> allUsers;
-        List<Borrowing> borrows;        
-        List<Source> source;
-        Point point = new Point();
-        bool CurrentUserIsAdmin;
-        public BorrowForSaveAndDelete borrowForSaveAndDelete = new BorrowForSaveAndDelete();
+        readonly List<User> _allUsers;
+        readonly List<Borrowing> _borrows;
+        readonly List<Source> _source;
+        private Point _point;
+        readonly bool _currentUserIsAdmin;
+        public readonly BorrowForSaveAndDelete BorrowForSaveAndDelete = new BorrowForSaveAndDelete();
+
         public BooksCancelation(List<User> allUsers, List<Borrowing> borrows, bool currentUserIsAdmin)
         {
             InitializeComponent();
-            this.allUsers = allUsers;
-            this.dataGridView_Users.DataSource = this.allUsers;
-            this.dataGridView_Users.Columns["Password"].Visible = false;
-            source = new List<Source>();
-            this.borrows = borrows;
-            CurrentUserIsAdmin = currentUserIsAdmin;
-            
-            dataGridView_Users_CellClick(null, new DataGridViewCellEventArgs(0,0));
+            _allUsers = allUsers;
+            dataGridView_Users.DataSource = _allUsers;
 
+            var dataGridViewColumn = dataGridView_Users.Columns["Password"];
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+
+            _source = new List<Source>();
+            _borrows = borrows;
+            _currentUserIsAdmin = currentUserIsAdmin;
+
+            DataGridView_Users_CellClick(null, new DataGridViewCellEventArgs(0, 0));
         }
-        private void dataGridView_Users_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+
+        private void DataGridView_Users_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 || e.ColumnIndex == -1 || e.RowIndex > allUsers.Count-1)
+            if (e.RowIndex == -1 || e.ColumnIndex == -1 || e.RowIndex > _allUsers.Count - 1)
                 return;
-            this.point.X = e.ColumnIndex;
-            this.point.Y = e.RowIndex;
-            
+            _point.X = e.ColumnIndex;
+            _point.Y = e.RowIndex;
         }
-        
-        private void dataGridView_Users_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void DataGridView_Users_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (e.ColumnIndex < 0 || e.RowIndex < 0)
                     return;
-                source.Clear();
+                _source.Clear();
 
-                string userID = this.dataGridView_Users.Rows[point.Y].Cells["ID"].Value.ToString();
-                foreach (Borrowing bor in borrows)
+                string userId = this.dataGridView_Users.Rows[_point.Y].Cells["ID"].Value.ToString();
+                foreach (var bor in _borrows)
                 {
-                    if (bor.UserID == userID)
-                    {
-                        Source s = new Source();
-                        s.BorrowedDate = bor.BorrowedDate;
-                        s.CopyID = bor.copy.Id;
-                        s.ItemID = bor.copy.ItemId;
-                        s.IsBorrowed = bor.copy.IsBorrowed;
-                        source.Add(s);
+                    if (bor.UserId != userId) continue;
 
-                    }
+                    var s = new Source
+                    {
+                        BorrowedDate = bor.BorrowedDate,
+                        CopyId = bor.Copy.Id,
+                        ItemId = bor.Copy.ItemId,
+                        IsBorrowed = bor.Copy.IsBorrowed
+                    };
+                    _source.Add(s);
                 }
                 dataGridView_Copies.DataSource = null;
-                if(source.Count != 0)
-                    dataGridView_Copies.DataSource = source;
+                if (_source.Count != 0)
+                    dataGridView_Copies.DataSource = _source;
                 dataGridView_Copies_CellClick(sender, new DataGridViewCellEventArgs(0, 0));
             }
             catch
-            { }
+            {
+                // ignored
+            }
         }
-        
+
         private void dataGridView_Copies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == -1 || e.RowIndex ==-1)
+            if (e.ColumnIndex == -1 || e.RowIndex == -1)
                 return;
             try
             {
-                string itemID = dataGridView_Copies.Rows[e.RowIndex].Cells["ItemID"].Value.ToString();
-                foreach (Borrowing bor in borrows)
+                string itemId = dataGridView_Copies.Rows[e.RowIndex].Cells["ItemID"].Value.ToString();
+                foreach (var bor in _borrows)
                 {
-                    if (bor.copy.ItemId == itemID)
-                    {
-                        this.textBox_AuthorOrigin.Text = bor.book.AuthorName;
-                        this.textBox_NameOrigin.Text = bor.book.Name;
-                        this.textBox_PublishedDateOrigin.Text = bor.book.PublishedDate;
-                        this.textBox_PublisherOrigin.Text = bor.book.Publisher;
+                    if (bor.Copy.ItemId != itemId) continue;
 
-                        if (Boolean.Parse(dataGridView_Copies.Rows[e.RowIndex].Cells["IsBorrowed"].Value.ToString()))
-                            this.button_CancelBook.Enabled = true;
-                        else
-                            this.button_CancelBook.Enabled = false;
-                    }
+                    textBox_AuthorOrigin.Text = bor.Book.AuthorName;
+                    textBox_NameOrigin.Text = bor.Book.Name;
+                    textBox_PublishedDateOrigin.Text = bor.Book.PublishedDate;
+                    textBox_PublisherOrigin.Text = bor.Book.Publisher;
+
+                    button_CancelBook.Enabled = Boolean.Parse(dataGridView_Copies.Rows[e.RowIndex].Cells["IsBorrowed"].Value.ToString());
                 }
             }
             catch
             {
-                this.textBox_AuthorOrigin.Text = this.textBox_NameOrigin.Text = this.textBox_PublishedDateOrigin.Text = this.textBox_PublisherOrigin.Text = String.Empty;
+                textBox_AuthorOrigin.Text = textBox_NameOrigin.Text =
+                    textBox_PublishedDateOrigin.Text = textBox_PublisherOrigin.Text = String.Empty;
             }
-            if (CurrentUserIsAdmin == false)
-                this.button_CancelBook.Enabled = false;
-
+            if (_currentUserIsAdmin == false)
+                button_CancelBook.Enabled = false;
         }
 
-        private void button_CancelBook_Click(object sender, EventArgs e)
+        private void Button_CancelBook_Click(object sender, EventArgs e)
         {
             try
             {
                 if (dataGridView_Users.CurrentRow == null || dataGridView_Copies.CurrentRow == null)
                     return;
-                this.borrowForSaveAndDelete.CopyID = dataGridView_Copies.CurrentRow.Cells["CopyID"].Value.ToString();
-                this.borrowForSaveAndDelete.UserID = dataGridView_Users.CurrentRow.Cells["ID"].Value.ToString();
-                this.DialogResult = DialogResult.OK;
+                BorrowForSaveAndDelete.CopyId = dataGridView_Copies.CurrentRow.Cells["CopyID"].Value.ToString();
+                BorrowForSaveAndDelete.UserId = dataGridView_Users.CurrentRow.Cells["ID"].Value.ToString();
+                DialogResult = DialogResult.OK;
             }
             catch
             {
-                this.DialogResult = DialogResult.No;
+                DialogResult = DialogResult.No;
             }
         }
     }
-}
-struct Source
-{
-    public string BorrowedDate { get; set; }
-    public string CopyID { get; set; }
-    public string ItemID { get; set; }
-    public bool IsBorrowed { get; set; }
 }

@@ -1,35 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Common;
-using System.Security.Cryptography;
 
 namespace Library
 {
-    public partial class New_User : Form
+    public partial class NewUser : Form
     {        
-        public User user; 
-        public New_User()
+        public User User; 
+        public NewUser()
         {
             InitializeComponent();
         }
 
-        private void button_Create_Click(object sender, EventArgs e)
+        private void Button_Create_Click(object sender, EventArgs e)
         {
-            if(this.textBox_Name.Text.Trim() == String.Empty || this.textBox_Password.Text.Trim() == String.Empty || this.textBox_UserName.Text.Trim() == String.Empty)
+            if(textBox_Name.Text.Trim() == String.Empty || 
+                textBox_Password.Text.Trim() == String.Empty || 
+                textBox_UserName.Text.Trim() == String.Empty)
             {
-                MessageBox.Show("Заполните все поля");
+                MessageBox.Show(@"Заполните все поля");
                 return;
             }
-            user = new User(Guid.NewGuid().ToString(), this.textBox_Name.Text.Trim(), this.textBox_UserName.Text.Trim(), Password.GetHashText(this.textBox_Password.Text.Trim()).ToString(), this.checkBox1.Checked);
-            this.DialogResult = DialogResult.OK;
+            User = new User(Guid.NewGuid().ToString(),
+                textBox_Name.Text.Trim(), 
+                textBox_UserName.Text.Trim(),
+                Password.GetHashText(textBox_Password.Text.Trim()).ToString(), 
+                checkBox1.Checked);
+            DialogResult = DialogResult.OK;
         }
-        
     }
 }

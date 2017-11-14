@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
 namespace Common
 {
@@ -13,12 +11,8 @@ namespace Common
             byte[] byteValue = Encoding.Unicode.GetBytes(s);
             MD5CryptoServiceProvider csp = new MD5CryptoServiceProvider();
             byte[] securedValue = csp.ComputeHash(byteValue);
-            string result = String.Empty;
+            string result = securedValue.Aggregate(String.Empty, (current, b) => current + $"{b:x2}");
 
-            foreach (byte b in securedValue)
-            {
-                result += String.Format("{0:x2}", b);
-            }
             return new Guid(result);
         }
     }
