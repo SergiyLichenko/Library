@@ -6,6 +6,9 @@ using Xunit;
 
 namespace Common.UT
 {
+    /// <summary>
+    /// Unit tests for article model
+    /// </summary>
     public class ArticleTests
     {
         [Fact]

@@ -18,12 +18,12 @@ namespace Library
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Client client = new Client();
-            client.changeUser += Client_changeUser;
+            client.ChangeUser += Client_changeUser;
 
             while (client.ShowDialog() == DialogResult.OK)
             {
                 client = new Client();
-                client.changeUser += Client_changeUser;
+                client.ChangeUser += Client_changeUser;
             }
             
 

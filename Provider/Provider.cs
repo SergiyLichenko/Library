@@ -1,125 +1,115 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
-using Common.libraryDataSetTableAdapters;
 using System.Windows.Forms;
 
 namespace Provider
 {
     public class Provider
     {
-
-        libraryDataSet libraryDS = new libraryDataSet();
-        SqlDataAdapter[] libraryDataAdapters;
-        DataTable[] libraryTables;
-        string[] tablesName;
-        SourceType dataType;
-        string targetFile;
-
-        public Provider() { }
+        private libraryDataSet _libraryDs = new libraryDataSet();
+        private SqlDataAdapter[] _libraryDataAdapters;
+        private DataTable[] _libraryTables;
+        private string[] _tablesName;
+        private SourceType _dataType;
+        private string _targetFile;
 
         public libraryDataSet GetAllData(SourceType dataType, string targetFile)
         {
-            
-            this.dataType = dataType;
-            this.targetFile = targetFile;
+            _dataType = dataType;
+            _targetFile = targetFile;
 
-            if (dataType == SourceType.XML)
+            if (dataType == SourceType.Xml)
             {
                 try
                 {
-                    this.libraryDS = new libraryDataSet();
-                    this.libraryDS.ReadXml(targetFile);
-                    this.libraryDS.ReadXmlSchema(targetFile);
-                    return this.libraryDS;
+                    _libraryDs = new libraryDataSet();
+                    _libraryDs.ReadXml(targetFile);
+                    _libraryDs.ReadXmlSchema(targetFile);
+                    return _libraryDs;
                 }
                 catch (Exception)
                 {
                     System.Windows.Forms.MessageBox.Show("An error occured. Restart application");
                     Application.ExitThread();
                 }
-               
             }
-            this.libraryTables = new DataTable[]
+            _libraryTables = new DataTable[]
             {
-                this.libraryDS.Items,
-                this.libraryDS.Authors,
-                this.libraryDS.Books,
-                this.libraryDS.Borrows,
-                this.libraryDS.Copies,
-                this.libraryDS.Magazines,
-                this.libraryDS.Articles,
-                this.libraryDS.ArticlesInMagazines,
-                this.libraryDS.Users
-            
-            };            
-            this.tablesName = new string[]{"Items","Authors","Books","Borrows","Copies",
-                "Magazines","Articles","ArticlesInMagazines","Users"};
-            libraryDataAdapters = new SqlDataAdapter[this.tablesName.Length];
-            for (int i = 0; i < this.tablesName.Length; i++)
+                _libraryDs.Items,
+                _libraryDs.Authors,
+                _libraryDs.Books,
+                _libraryDs.Borrows,
+                _libraryDs.Copies,
+                _libraryDs.Magazines,
+                _libraryDs.Articles,
+                _libraryDs.ArticlesInMagazines,
+                _libraryDs.Users
+            };
+            _tablesName = new[]
             {
-                this.libraryDataAdapters[i] = new SqlDataAdapter("Select * from " + tablesName[i], targetFile);                
-                SqlCommandBuilder builder = new SqlCommandBuilder(libraryDataAdapters[i]);
-               
-            }
-            for (int i = 0; i < this.tablesName.Length; i++)
-                this.libraryDataAdapters[i].Fill(libraryTables[i]);
-            
-            return this.libraryDS;
+                "Items", "Authors", "Books", "Borrows", "Copies",
+                "Magazines", "Articles", "ArticlesInMagazines", "Users"
+            };
+            _libraryDataAdapters = new SqlDataAdapter[_tablesName.Length];
+            for (int i = 0; i < _tablesName.Length; i++)
+                _libraryDataAdapters[i] = new SqlDataAdapter("Select * from " + _tablesName[i], targetFile);
+
+            for (int i = 0; i < _tablesName.Length; i++)
+                _libraryDataAdapters[i].Fill(_libraryTables[i]);
+
+            return _libraryDs;
         }
 
         public void UpdateAllData()
-        {            
-            if (this.dataType == SourceType.XML)
+        {
+            if (_dataType == SourceType.Xml)
             {
-                this.libraryDS.WriteXml(this.targetFile);
+                _libraryDs.WriteXml(_targetFile);
                 return;
             }
             try
-            {                
-                for (int i = 0; i < this.libraryDataAdapters.Length; i++)
-                    this.libraryDataAdapters[i].Update(libraryTables[i]);
-            }
-            catch(Exception)
             {
+                for (int i = 0; i < _libraryDataAdapters.Length; i++)
+                    _libraryDataAdapters[i].Update(_libraryTables[i]);
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
-        public void DeleteAuthor(string authorID)
+
+        public void DeleteAuthor(string authorId)
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(targetFile))
+                using (SqlConnection con = new SqlConnection(_targetFile))
                 {
                     con.Open();
-                    SqlCommand com = new SqlCommand("DeleteAuthor", con);
+                    var com = new SqlCommand("DeleteAuthor", con);
                     com.CommandType = CommandType.StoredProcedure;
 
-                    SqlParameter param = new SqlParameter();
+                    var param = new SqlParameter();
                     param.ParameterName = "@AuthorID";
                     param.SqlDbType = SqlDbType.NVarChar;
-                    param.Value = authorID;
+                    param.Value = authorId;
                     param.Direction = ParameterDirection.Input;
                     com.Parameters.Add(param);
                     com.ExecuteNonQuery();
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
-
             }
         }
+
         public void FillAuthors()
         {
-            if (dataType == SourceType.XML)
+            if (_dataType == SourceType.Xml)
                 return;
-            libraryTables[1].Clear();
-            libraryDataAdapters[1].Fill(libraryTables[1]);
+            _libraryTables[1].Clear();
+            _libraryDataAdapters[1].Fill(_libraryTables[1]);
         }
     }
 }

@@ -130,7 +130,7 @@
             this.button_Refresh.TabIndex = 19;
             this.button_Refresh.Text = "Refresh";
             this.button_Refresh.UseVisualStyleBackColor = true;
-            this.button_Refresh.Click += new System.EventHandler(this.button_Refresh_Click);
+            this.button_Refresh.Click += new System.EventHandler(this.Button_Refresh_Click);
             // 
             // label9
             // 
@@ -214,7 +214,7 @@
             this.showAllCopiesToolStripMenuItem.Name = "showAllCopiesToolStripMenuItem";
             this.showAllCopiesToolStripMenuItem.Size = new System.Drawing.Size(170, 24);
             this.showAllCopiesToolStripMenuItem.Text = "&Выдать книгу";
-            this.showAllCopiesToolStripMenuItem.Click += new System.EventHandler(this.showAllCopiesToolStripMenuItem_Click);
+            this.showAllCopiesToolStripMenuItem.Click += new System.EventHandler(this.ShowAllCopiesToolStripMenuItem_Click);
             // 
             // Magazines_Articles
             // 
@@ -269,7 +269,7 @@
             this.button_RefreshArticle.TabIndex = 25;
             this.button_RefreshArticle.Text = "Refresh";
             this.button_RefreshArticle.UseVisualStyleBackColor = true;
-            this.button_RefreshArticle.Click += new System.EventHandler(this.button_RefreshArticle_Click);
+            this.button_RefreshArticle.Click += new System.EventHandler(this.Button_RefreshArticle_Click);
             // 
             // label5
             // 
@@ -367,7 +367,7 @@
             this.button_RefreshMagazine.TabIndex = 22;
             this.button_RefreshMagazine.Text = "Refresh";
             this.button_RefreshMagazine.UseVisualStyleBackColor = true;
-            this.button_RefreshMagazine.Click += new System.EventHandler(this.button_RefreshMagazine_Click);
+            this.button_RefreshMagazine.Click += new System.EventHandler(this.Button_RefreshMagazine_Click);
             // 
             // label3
             // 
@@ -478,21 +478,21 @@
             this.changeUserToolStripMenuItem.Name = "changeUserToolStripMenuItem";
             this.changeUserToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.changeUserToolStripMenuItem.Text = "&Change User";
-            this.changeUserToolStripMenuItem.Click += new System.EventHandler(this.changeUserToolStripMenuItem_Click);
+            this.changeUserToolStripMenuItem.Click += new System.EventHandler(this.ChangeUserToolStripMenuItem_Click);
             // 
             // writeToXMLToolStripMenuItem
             // 
             this.writeToXMLToolStripMenuItem.Name = "writeToXMLToolStripMenuItem";
             this.writeToXMLToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.writeToXMLToolStripMenuItem.Text = "&Write to XML";
-            this.writeToXMLToolStripMenuItem.Click += new System.EventHandler(this.writeToXMLToolStripMenuItem_Click);
+            this.writeToXMLToolStripMenuItem.Click += new System.EventHandler(this.WriteToXMLToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.exitToolStripMenuItem.Text = "&Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // книгиToolStripMenuItem
             // 
@@ -515,7 +515,7 @@
             this.updateSelectedBookToolStripMenuItem.Name = "updateSelectedBookToolStripMenuItem";
             this.updateSelectedBookToolStripMenuItem.Size = new System.Drawing.Size(232, 26);
             this.updateSelectedBookToolStripMenuItem.Text = "&Update Selected Book";
-            this.updateSelectedBookToolStripMenuItem.Click += new System.EventHandler(this.updateSelectedBookToolStripMenuItem_Click);
+            this.updateSelectedBookToolStripMenuItem.Click += new System.EventHandler(this.UpdateSelectedBookToolStripMenuItem_Click);
             // 
             // magazinesToolStripMenuItem
             // 
@@ -530,7 +530,7 @@
             this.addNewMagazineToolStripMenuItem.Name = "addNewMagazineToolStripMenuItem";
             this.addNewMagazineToolStripMenuItem.Size = new System.Drawing.Size(215, 26);
             this.addNewMagazineToolStripMenuItem.Text = "&Add New Magazine";
-            this.addNewMagazineToolStripMenuItem.Click += new System.EventHandler(this.addNewMagazineToolStripMenuItem_Click);
+            this.addNewMagazineToolStripMenuItem.Click += new System.EventHandler(this.AddNewMagazineToolStripMenuItem_Click);
             // 
             // articlesToolStripMenuItem
             // 
@@ -545,7 +545,7 @@
             this.addNewArticleToolStripMenuItem.Name = "addNewArticleToolStripMenuItem";
             this.addNewArticleToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.addNewArticleToolStripMenuItem.Text = "&Add New Article";
-            this.addNewArticleToolStripMenuItem.Click += new System.EventHandler(this.addNewArticleToolStripMenuItem_Click);
+            this.addNewArticleToolStripMenuItem.Click += new System.EventHandler(this.AddNewArticleToolStripMenuItem_Click);
             // 
             // usersToolStripMenuItem
             // 
@@ -561,7 +561,7 @@
             this.showAllUsersToolStripMenuItem.Name = "showAllUsersToolStripMenuItem";
             this.showAllUsersToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.showAllUsersToolStripMenuItem.Text = "&Show All Users";
-            this.showAllUsersToolStripMenuItem.Click += new System.EventHandler(this.showAllUsersToolStripMenuItem_Click);
+            this.showAllUsersToolStripMenuItem.Click += new System.EventHandler(this.ShowAllUsersToolStripMenuItem_Click);
             // 
             // createNewUserToolStripMenuItem
             // 

@@ -59,8 +59,8 @@
             this.dataGridView_Users.ReadOnly = true;
             this.dataGridView_Users.Size = new System.Drawing.Size(914, 181);
             this.dataGridView_Users.TabIndex = 0;
-            this.dataGridView_Users.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Users_CellClick);
-            this.dataGridView_Users.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Users_CellMouseEnter);
+            this.dataGridView_Users.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_Users_CellClick);
+            this.dataGridView_Users.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_Users_CellMouseEnter);
             // 
             // label1
             // 
@@ -81,7 +81,7 @@
             this.button_CancelBook.TabIndex = 4;
             this.button_CancelBook.Text = "Списать книгу";
             this.button_CancelBook.UseVisualStyleBackColor = true;
-            this.button_CancelBook.Click += new System.EventHandler(this.button_CancelBook_Click);
+            this.button_CancelBook.Click += new System.EventHandler(this.Button_CancelBook_Click);
             // 
             // groupBox1
             // 

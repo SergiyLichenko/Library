@@ -1,37 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common
 {
-    public class Magazine:Item
+    public class Magazine : Item
     {
-        public string IssueNumber { get; set; }
+        public string IssueNumber { get; }
 
-        public Dictionary<string, string> ItemFields { get; private set; }
-        public Dictionary<string, string> MagazineFields{get;private set;}
+        public Dictionary<string, string> ItemFields { get; }
+        public Dictionary<string, string> MagazineFields { get; }
 
-        public Magazine() { }
         public Magazine(string name, string publisher, string publishedDate, string issueNumber)
             : this
-                (String.Empty, name, publisher, publishedDate, issueNumber) { }
-        public Magazine(string id,string name, string publisher, string publishedDate, string issueNumber)
+                (String.Empty, name, publisher, publishedDate, issueNumber)
+        { }
+        public Magazine(string id, string name, string publisher, string publishedDate, string issueNumber)
         {
-            this.ID = id;
-            this.Name = name;
-            this.Publisher = publisher;
-            this.PublishedDate = publishedDate;
-            this.IssueNumber = issueNumber;
+            Id = id;
+            Name = name;
+            Publisher = publisher;
+            PublishedDate = publishedDate;
+            IssueNumber = issueNumber;
 
-            ItemFields = new Dictionary<string, string>(3);
-            ItemFields.Add("Name", Name);
-            ItemFields.Add("Publisher", Publisher);
-            ItemFields.Add("Published Date", PublishedDate.ToString());
+            ItemFields = new Dictionary<string, string>(3)
+            {
+                {"Name", Name},
+                {"Publisher", Publisher},
+                {"Published Date", PublishedDate}
+            };
 
-            MagazineFields = new Dictionary<string, string>(1);
-            MagazineFields.Add("IssueNumber", IssueNumber);
+            MagazineFields = new Dictionary<string, string>(1) { { "IssueNumber", IssueNumber } };
         }
     }
 }

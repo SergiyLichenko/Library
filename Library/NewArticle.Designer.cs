@@ -68,7 +68,7 @@
             this.button_AddArticle.TabIndex = 36;
             this.button_AddArticle.Text = "Add Article";
             this.button_AddArticle.UseVisualStyleBackColor = true;
-            this.button_AddArticle.Click += new System.EventHandler(this.button_AddArticle_Click);
+            this.button_AddArticle.Click += new System.EventHandler(this.Button_AddArticle_Click);
             // 
             // button_Cancel
             // 
@@ -79,7 +79,7 @@
             this.button_Cancel.TabIndex = 35;
             this.button_Cancel.Text = "Cancel";
             this.button_Cancel.UseVisualStyleBackColor = true;
-            this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
+            this.button_Cancel.Click += new System.EventHandler(this.Button_Cancel_Click);
             // 
             // button_SaveArticle
             // 
@@ -209,7 +209,7 @@
             this.listBox_MagazineName.Name = "listBox_MagazineName";
             this.listBox_MagazineName.Size = new System.Drawing.Size(311, 95);
             this.listBox_MagazineName.TabIndex = 42;
-            this.listBox_MagazineName.SelectedIndexChanged += new System.EventHandler(this.listBox_MagazineName_SelectedIndexChanged);
+            this.listBox_MagazineName.SelectedIndexChanged += new System.EventHandler(this.ListBox_MagazineName_SelectedIndexChanged);
             // 
             // listBox_MagazineIssueNumber
             // 

@@ -182,8 +182,8 @@
             this.dataGridView_Copies.ReadOnly = true;
             this.dataGridView_Copies.Size = new System.Drawing.Size(450, 181);
             this.dataGridView_Copies.TabIndex = 22;
-            this.dataGridView_Copies.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEnter);
-            this.dataGridView_Copies.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
+            this.dataGridView_Copies.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellEnter);
+            this.dataGridView_Copies.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.DataGridView1_RowPrePaint);
             // 
             // button_GiveBook
             // 
@@ -194,7 +194,7 @@
             this.button_GiveBook.TabIndex = 25;
             this.button_GiveBook.Text = "Выдать книгу";
             this.button_GiveBook.UseVisualStyleBackColor = true;
-            this.button_GiveBook.Click += new System.EventHandler(this.button_GiveBook_Click);
+            this.button_GiveBook.Click += new System.EventHandler(this.Button_GiveBook_Click);
             // 
             // dataGridView_Users
             // 

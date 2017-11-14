@@ -1,6 +1,6 @@
 ﻿namespace Library
 {
-    partial class New_User
+    partial class NewUser
     {
         /// <summary>
         /// Required designer variable.
@@ -123,7 +123,7 @@
             this.button_Create.TabIndex = 8;
             this.button_Create.Text = "Create";
             this.button_Create.UseVisualStyleBackColor = true;
-            this.button_Create.Click += new System.EventHandler(this.button_Create_Click);
+            this.button_Create.Click += new System.EventHandler(this.Button_Create_Click);
             // 
             // New_User
             // 
@@ -139,7 +139,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_Name);
             this.Controls.Add(this.label1);
-            this.Name = "New_User";
+            this.Name = "NewUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New User";
             this.ResumeLayout(false);

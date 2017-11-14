@@ -165,7 +165,7 @@
             this.button_SaveBook.TabIndex = 12;
             this.button_SaveBook.Text = "Save Book";
             this.button_SaveBook.UseVisualStyleBackColor = true;
-            this.button_SaveBook.Click += new System.EventHandler(this.button_SaveBook_Click);
+            this.button_SaveBook.Click += new System.EventHandler(this.Button_SaveBook_Click);
             // 
             // button_Cancel
             // 
@@ -176,7 +176,7 @@
             this.button_Cancel.TabIndex = 13;
             this.button_Cancel.Text = "Cancel";
             this.button_Cancel.UseVisualStyleBackColor = true;
-            this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
+            this.button_Cancel.Click += new System.EventHandler(this.Button_Cancel_Click);
             // 
             // button_AddBook
             // 
@@ -186,7 +186,7 @@
             this.button_AddBook.TabIndex = 14;
             this.button_AddBook.Text = "Add Book";
             this.button_AddBook.UseVisualStyleBackColor = true;
-            this.button_AddBook.Click += new System.EventHandler(this.button_AddBook_Click);
+            this.button_AddBook.Click += new System.EventHandler(this.Button_AddBook_Click);
             // 
             // label_bookCount
             // 

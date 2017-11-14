@@ -289,7 +289,7 @@
             this.button1.TabIndex = 23;
             this.button1.Text = "Update";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // button_Cancel
             // 
@@ -299,7 +299,7 @@
             this.button_Cancel.TabIndex = 24;
             this.button_Cancel.Text = "Cancel";
             this.button_Cancel.UseVisualStyleBackColor = true;
-            this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
+            this.button_Cancel.Click += new System.EventHandler(this.Button_Cancel_Click);
             // 
             // UpdateBook
             // 

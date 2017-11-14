@@ -3,19 +3,56 @@ using System.Collections.Generic;
 
 namespace Common
 {
+    /// <summary>
+    /// Class which represents article entity from database
+    /// </summary>
     public class Article:Item
     {
+        /// <summary>
+        /// The name of the magazin
+        /// </summary>
         public string MagazineName { get; }
+
+        /// <summary>
+        /// Magazine's issue number
+        /// </summary>
         public string MagazineIssueNumber { get;  }
+
+        /// <summary>
+        /// Name of the magazine's author
+        /// </summary>
         public string AuthorName { get; }
+
+        /// <summary>
+        /// Magazine's version
+        /// </summary>
         public string Version { get;  }
-                                    
+                          
+        /// <summary>
+        /// Fields that are related to Items table
+        /// </summary>
         public Dictionary<string, string> ItemFields { get; }
+
+        /// <summary>
+        /// Fields that are related to Magazines table
+        /// </summary>
         public Dictionary<string, string> MagazineFields { get; }
+
+        /// <summary>
+        /// Fields that are related to Authors table
+        /// </summary>
         public Dictionary<string, string> AuthorFields { get;  }
+
+        /// <summary>
+        /// Fields that are related to Article table
+        /// </summary>
         public Dictionary<string, string> ArticleFields { get;  }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Article() { }
+
         public Article(string name, string publisher, string publishedDate, string magazineName,
             string magazineIssueNumber, string author, string version)
             : this(String.Empty, name, publisher, publishedDate, magazineName, magazineIssueNumber, author, version)
@@ -25,7 +62,7 @@ namespace Common
         public Article(string id, string name, string publisher, string publishedDate, string magazineName,
             string magazineIssueNumber, string author, string version)
         {
-            ID = id ?? throw new ArgumentNullException(nameof(id));
+            Id = id ?? throw new ArgumentNullException(nameof(id));
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Publisher = publisher ?? throw new ArgumentNullException(nameof(publisher));
             PublishedDate = publishedDate ?? throw new ArgumentNullException(nameof(publishedDate));

@@ -110,6 +110,7 @@
     <Compile Include="ShowAllCopies.Designer.cs">
       <DependentUpon>ShowAllCopies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Source.cs" />
     <Compile Include="UpdateBook.cs">
       <SubType>Form</SubType>
     </Compile>
